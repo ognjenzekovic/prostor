@@ -1,15 +1,17 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Routes, Route } from 'react-router-dom';
 import { AppRouter } from './app/Router.tsx';
+import { AppRoutes } from './app/AppRoutes.tsx';
+import { ScriptProvider } from './app/ScriptProvider.tsx';
+import './i18n';
 import './index.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <AppRouter>
-      <Routes>
-        <Route path="/" element={<h1>Prostor</h1>} />
-      </Routes>
-    </AppRouter>
+    <ScriptProvider>
+      <AppRouter>
+        <AppRoutes />
+      </AppRouter>
+    </ScriptProvider>
   </StrictMode>
 );

@@ -46,11 +46,62 @@ function sleep(ms: number): Promise<void> {
 
 /**
  * Resolve mock data for a given path.
- * TODO: Connect to src/mocks/ when mock data files are created.
  */
 function resolveMock<T>(path: string): T {
-  // Stub for now — will be implemented when src/mocks/ is created
-  throw new ApiError(404, 'MOCK_NOT_IMPLEMENTED', `Mock for ${path} not implemented yet`);
+  // Remove query string for routing
+  const [pathname] = path.split('?');
+
+  // Catalog endpoints
+  if (pathname === '/catalog/products') {
+    return import('../mocks/products.json').then((m) => m.default) as T;
+  }
+
+  if (pathname.startsWith('/catalog/products/')) {
+    const slug = pathname.replace('/catalog/products/', '');
+    return import('../mocks/products.json').then((m) => {
+      const product = m.default.content.find((p: { slug: string }) => p.slug === slug);
+      if (!product) {
+        throw new ApiError(404, 'PRODUCT_NOT_FOUND', `Product with slug "${slug}" not found`);
+      }
+      return product;
+    }) as T;
+  }
+
+  if (pathname === '/catalog/filters') {
+    // Generate filters from products.json
+    return import('../mocks/products.json').then((m) => {
+      const products = m.default.content;
+      const grades = new Map<string, number>();
+      const areas = new Map<string, number>();
+      const examPrep = new Map<string, number>();
+
+      products.forEach((p: { grades?: string[]; areas?: string[]; examPrep?: string }) => {
+        p.grades?.forEach((g) => grades.set(g, (grades.get(g) || 0) + 1));
+        p.areas?.forEach((a) => areas.set(a, (areas.get(a) || 0) + 1));
+        if (p.examPrep) examPrep.set(p.examPrep, (examPrep.get(p.examPrep) || 0) + 1);
+      });
+
+      return {
+        grades: Array.from(grades.entries()).map(([value, count]) => ({
+          value,
+          label: value,
+          count,
+        })),
+        areas: Array.from(areas.entries()).map(([value, count]) => ({
+          value,
+          label: value,
+          count,
+        })),
+        examPrep: Array.from(examPrep.entries()).map(([value, count]) => ({
+          value,
+          label: value,
+          count,
+        })),
+      };
+    }) as T;
+  }
+
+  throw new ApiError(404, 'MOCK_NOT_FOUND', `No mock data for ${path}`);
 }
 
 /**

@@ -1,0 +1,187 @@
+{
+  "content": [
+    {
+      "id": "1f8b1a10-0000-4000-8000-000000000001",
+      "slug": "padezi-6-7-razred",
+      "type": "COURSE",
+      "title": "Padeži — 6. i 7. razred",
+      "shortDescription": "Sedam padeža kroz primere iz svakodnevnog govora, sa vežbanjima.",
+      "grades": [
+        "OS_6",
+        "OS_7"
+      ],
+      "areas": [
+        "GRAMATIKA"
+      ],
+      "examPrep": null,
+      "schoolYear": "2026/2027",
+      "price": {
+        "amount": "3490.00",
+        "currency": "RSD"
+      },
+      "compareAtPrice": null,
+      "accessMode": "UNTIL_DATE",
+      "accessDurationDays": null,
+      "accessUntil": "2027-08-31",
+      "coverUrl": "/mock/covers/padezi.jpg",
+      "lessonCount": 9,
+      "totalDurationSec": 8400,
+      "owned": false,
+      "published": true
+    },
+    {
+      "id": "1f8b1a10-0000-4000-8000-000000000002",
+      "slug": "pravopis-najcesce-greske",
+      "type": "COURSE",
+      "title": "Pravopis — najčešće greške",
+      "shortDescription": "Spojeno i odvojeno pisanje, negacija, veliko slovo, interpunkcija.",
+      "grades": [
+        "OS_7",
+        "OS_8",
+        "SS_1"
+      ],
+      "areas": [
+        "PRAVOPIS"
+      ],
+      "examPrep": null,
+      "schoolYear": "2026/2027",
+      "price": {
+        "amount": "2990.00",
+        "currency": "RSD"
+      },
+      "compareAtPrice": null,
+      "accessMode": "DAYS",
+      "accessDurationDays": 180,
+      "accessUntil": null,
+      "coverUrl": "/mock/covers/pravopis.jpg",
+      "lessonCount": 7,
+      "totalDurationSec": 6300,
+      "owned": true,
+      "published": true
+    },
+    {
+      "id": "1f8b1a10-0000-4000-8000-000000000003",
+      "slug": "lektira-8-razred",
+      "type": "COURSE",
+      "title": "Lektira za 8. razred",
+      "shortDescription": "Analiza svih obaveznih dela — likovi, motivi, kompozicija.",
+      "grades": [
+        "OS_8"
+      ],
+      "areas": [
+        "LEKTIRA",
+        "KNJIZEVNOST"
+      ],
+      "examPrep": null,
+      "schoolYear": "2026/2027",
+      "price": {
+        "amount": "4490.00",
+        "currency": "RSD"
+      },
+      "compareAtPrice": null,
+      "accessMode": "UNTIL_DATE",
+      "accessDurationDays": null,
+      "accessUntil": "2027-08-31",
+      "coverUrl": "/mock/covers/lektira8.jpg",
+      "lessonCount": 14,
+      "totalDurationSec": 16200,
+      "owned": false,
+      "published": true
+    },
+    {
+      "id": "1f8b1a10-0000-4000-8000-000000000004",
+      "slug": "mala-matura-kompletna-priprema",
+      "type": "BUNDLE",
+      "title": "Mala matura — kompletna priprema",
+      "shortDescription": "Celo gradivo za završni ispit uz probne testove. Pristup do dana ispita.",
+      "grades": [
+        "OS_8"
+      ],
+      "areas": [
+        "GRAMATIKA",
+        "PRAVOPIS",
+        "KNJIZEVNOST",
+        "LEKTIRA"
+      ],
+      "examPrep": "MALA_MATURA",
+      "schoolYear": "2026/2027",
+      "price": {
+        "amount": "8990.00",
+        "currency": "RSD"
+      },
+      "compareAtPrice": {
+        "amount": "11970.00",
+        "currency": "RSD"
+      },
+      "accessMode": "UNTIL_DATE",
+      "accessDurationDays": null,
+      "accessUntil": "2027-07-15",
+      "coverUrl": "/mock/covers/mala-matura.jpg",
+      "lessonCount": 30,
+      "totalDurationSec": 30900,
+      "owned": false,
+      "published": true
+    },
+    {
+      "id": "1f8b1a10-0000-4000-8000-000000000005",
+      "slug": "prijemni-filoloski-knjizevnost",
+      "type": "COURSE",
+      "title": "Prijemni — književnost za filološke smerove",
+      "shortDescription": "Pregled epoha i dela sa spiska za prijemni, sa tehnikom rešavanja testa.",
+      "grades": [
+        "SS_4"
+      ],
+      "areas": [
+        "KNJIZEVNOST"
+      ],
+      "examPrep": "PRIJEMNI_FAKULTET",
+      "schoolYear": "2026/2027",
+      "price": {
+        "amount": "6900.00",
+        "currency": "RSD"
+      },
+      "compareAtPrice": null,
+      "accessMode": "UNTIL_DATE",
+      "accessDurationDays": null,
+      "accessUntil": "2027-07-31",
+      "coverUrl": "/mock/covers/prijemni.jpg",
+      "lessonCount": 16,
+      "totalDurationSec": 21600,
+      "owned": false,
+      "published": true
+    },
+    {
+      "id": "1f8b1a10-0000-4000-8000-000000000006",
+      "slug": "kongruencija-lekcija",
+      "type": "VIDEO",
+      "title": "Kongruencija — slaganje reči u rečenici",
+      "shortDescription": "Jedna lekcija o temi koja se najčešće pogrešno radi na testovima.",
+      "grades": [
+        "OS_7",
+        "OS_8"
+      ],
+      "areas": [
+        "GRAMATIKA"
+      ],
+      "examPrep": null,
+      "schoolYear": "2026/2027",
+      "price": {
+        "amount": "590.00",
+        "currency": "RSD"
+      },
+      "compareAtPrice": null,
+      "accessMode": "LIFETIME",
+      "accessDurationDays": null,
+      "accessUntil": null,
+      "coverUrl": "/mock/covers/kongruencija.jpg",
+      "lessonCount": 1,
+      "totalDurationSec": 1620,
+      "owned": false,
+      "published": true
+    }
+  ],
+  "page": 0,
+  "size": 12,
+  "totalElements": 6,
+  "totalPages": 1
+}

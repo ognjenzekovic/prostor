@@ -1,111 +1,144 @@
+@import 'tailwindcss';
+
+/* Source Serif 4 and Inter Tight are loaded from index.html. */
+
+/* Primitive tokens — raw color values (change these to update theme) */
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  /* Brand — brass (warm accent) */
+  --raw-brand-100: #f7f3e8;
+  --raw-brand-500: #d9b870;
+  --raw-brand-600: #b8954e;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  /* Neutral — cool grays */
+  --raw-neutral-50:  #fafaf8;
+  --raw-neutral-100: #f1f0ee;
+  --raw-neutral-500: #867c92;
+  --raw-neutral-700: #5d5166;
+  --raw-neutral-900: #2a2435;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Accent — pastels (six tones for subject areas) */
+  --raw-accent-1: #d1eae6;  /* tirkizna */
+  --raw-accent-2: #e0d6f0;  /* lavanda */
+  --raw-accent-3: #d4dcf2;  /* plava */
+  --raw-accent-4: #dff0d9;  /* zelenkasta */
+  --raw-accent-5: #f0dceb;  /* roze */
+  --raw-accent-6: #ddd8f0;  /* svetlo ljubičasta */
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  /* Semantic */
+  --raw-success: #3e9771;
+  --raw-danger:  #c94a3c;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
+/* Semantic tokens — map primitives to Tailwind utilities */
+@theme {
+  /* Brand */
+  --color-brand-100: var(--raw-brand-100);
+  --color-brand-500: var(--raw-brand-500);
+  --color-brand-600: var(--raw-brand-600);
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
+  /* Neutral */
+  --color-neutral-50:  var(--raw-neutral-50);
+  --color-neutral-100: var(--raw-neutral-100);
+  --color-neutral-500: var(--raw-neutral-500);
+  --color-neutral-700: var(--raw-neutral-700);
+  --color-neutral-900: var(--raw-neutral-900);
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+  /* Accent */
+  --color-accent-1: var(--raw-accent-1);
+  --color-accent-2: var(--raw-accent-2);
+  --color-accent-3: var(--raw-accent-3);
+  --color-accent-4: var(--raw-accent-4);
+  --color-accent-5: var(--raw-accent-5);
+  --color-accent-6: var(--raw-accent-6);
+
+  /* Semantic */
+  --color-success: var(--raw-success);
+  --color-danger:  var(--raw-danger);
+
+  /* Typography */
+  --font-display: 'Source Serif 4', Georgia, serif;
+  --font-sans: 'Inter Tight', system-ui, sans-serif;
+
+  /* Spacing — 4px scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
 }
 
 body {
   margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--color-neutral-900);
+  background: var(--color-neutral-50);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+/* Focus must stay visible — whole purchase flow is keyboard-navigable (4.8) */
+:focus-visible {
+  outline: 2px solid var(--color-brand-600);
+  outline-offset: 2px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-neutral-900);
+  margin: 0;
 }
 
 h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
+  font-size: clamp(2rem, 5vw, 3rem);
 }
+
 h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
 }
+
+h3 {
+  font-size: 1.25rem;
+}
+
 p {
   margin: 0;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+/* Tabular numbers for prices */
+.price,
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+/* Max-width for readable text in blog */
+.prose {
+  max-width: 68ch;
+}
+
+/* Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+#root {
+  min-height: 100vh;
 }

@@ -4,7 +4,15 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>prostor</title>
+    <!-- Fonts load from HTML, not via CSS @import: @import blocks until the
+         stylesheet is parsed, which costs LCP on mobile (spec 4.9). -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap"
+    />
+    <title>Prostor</title>
   </head>
   <body>
     <div id="root"></div>

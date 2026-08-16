@@ -1,4 +1,6 @@
-import type { Money } from '../api/schema';
+import type { components } from '../api/schema';
+
+type Money = components['schemas']['Money'];
 
 /**
  * Formats money for display using Intl.NumberFormat.
