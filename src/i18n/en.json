@@ -4,10 +4,11 @@
     "skipToContent": "Skip to content",
     "underConstruction": "This page is being built."
   },
-  "script": {
-    "label": "Script",
-    "latin": "Latin",
-    "cyrillic": "Ћирилица"
+  "locale": {
+    "label": "Language and script",
+    "srLatin": "Srpski (latinica)",
+    "srCyrillic": "Српски (ћирилица)",
+    "en": "English"
   },
   "nav": {
     "primary": "Main navigation",

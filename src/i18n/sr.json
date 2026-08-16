@@ -4,10 +4,11 @@
     "skipToContent": "Preskoči na sadržaj",
     "underConstruction": "Ova stranica je u izradi."
   },
-  "script": {
-    "label": "Pismo",
-    "latin": "Latinica",
-    "cyrillic": "Ћирилица"
+  "locale": {
+    "label": "Jezik i pismo",
+    "srLatin": "Srpski (latinica)",
+    "srCyrillic": "Српски (ћирилица)",
+    "en": "English"
   },
   "nav": {
     "primary": "Glavna navigacija",

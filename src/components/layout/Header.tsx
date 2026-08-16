@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Container } from './Container';
-import { ScriptSwitcher } from './ScriptSwitcher';
+import { LocaleSwitcher } from './LocaleSwitcher';
 import { useT } from '../../hooks/useT';
 import { routes } from '../../lib/routes';
 
@@ -59,7 +59,7 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-4 md:flex">
-          <ScriptSwitcher />
+          <LocaleSwitcher />
           <NavLink to={routes.cart()} className={navLinkClass}>
             {t('nav.cart')}
           </NavLink>
@@ -105,7 +105,7 @@ export function Header() {
             </nav>
 
             <div className="mt-4 flex items-center justify-between gap-4">
-              <ScriptSwitcher />
+              <LocaleSwitcher />
               <Link
                 to={routes.login()}
                 className="rounded-sm bg-brand-500 px-4 py-2 text-sm font-medium text-neutral-900"

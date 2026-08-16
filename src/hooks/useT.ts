@@ -16,7 +16,8 @@ import { toCyrillic } from '../lib/cyrillic';
 export function useT() {
   const { t, i18n } = useTranslation();
   const { script } = useScript();
-  const transliterate = i18n.language === 'sr' && script === 'cyrillic';
+  // startsWith, not ===: the language can arrive as 'sr-RS' or 'sr-Latn'.
+  const transliterate = i18n.language.startsWith('sr') && script === 'cyrillic';
 
   const translate = useCallback(
     (key: string, options?: Record<string, unknown>): string => {
