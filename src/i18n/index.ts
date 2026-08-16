@@ -3,34 +3,36 @@ import { initReactI18next } from 'react-i18next';
 import sr from './sr.json';
 import en from './en.json';
 
-const resources = {
-  sr: { translation: sr },
-  en: { translation: en },
-};
+const STORAGE_KEY = 'uiLanguage';
+const SUPPORTED = ['sr', 'en'];
 
-// Detect language from localStorage or browser, fallback to 'sr'
-const storedLang = localStorage.getItem('language');
-const browserLang = navigator.language.split('-')[0];
-const detectedLang = storedLang || (browserLang === 'en' ? 'en' : 'sr');
+/**
+ * Serbian unless the reader picked otherwise — the browser locale does not
+ * get a vote. The audience is Serbian and en.json is a stub, so an English
+ * browser must not silently swap the language out from under them.
+ */
+function initialLanguage(): string {
+  const stored = localStorage.getItem(STORAGE_KEY);
+  return stored && SUPPORTED.includes(stored) ? stored : 'sr';
+}
 
-i18n
-  .use(initReactI18next)
-  .init({
-    resources,
-    lng: detectedLang,
-    fallbackLng: 'sr',
-    interpolation: {
-      escapeValue: false, // React already escapes
-    },
-  });
-
-// Persist language changes
-i18n.on('languageChanged', (lng) => {
-  localStorage.setItem('language', lng);
-  document.documentElement.lang = lng;
+i18n.use(initReactI18next).init({
+  resources: {
+    sr: { translation: sr },
+    en: { translation: en },
+  },
+  lng: initialLanguage(),
+  fallbackLng: 'sr',
+  supportedLngs: SUPPORTED,
+  interpolation: {
+    escapeValue: false, // React already escapes
+  },
 });
 
-// Set initial lang attribute
-document.documentElement.lang = i18n.language;
+i18n.on('languageChanged', (lng) => {
+  localStorage.setItem(STORAGE_KEY, lng);
+});
+
+// <html lang> is set by ScriptProvider, which knows the script too (sr-Latn / sr-Cyrl).
 
 export default i18n;

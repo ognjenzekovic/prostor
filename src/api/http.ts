@@ -1,142 +1,56 @@
 /**
- * HTTP client with mock layer support.
+ * HTTP client.
  *
- * When VITE_USE_MOCKS=true, intercepts requests and returns mock data.
- * This is the ONLY place where fetch happens. Components never call fetch directly.
+ * This is the ONLY place where fetch happens — components go through
+ * src/api/*.ts. That single rule is what makes "mocks -> real backend" an env
+ * variable instead of a rewrite (spec 4.2).
+ *
+ * When VITE_USE_MOCKS=true every request is answered by src/mocks instead.
  */
+import { ApiError } from './errors';
+
+export { ApiError };
 
 const USE_MOCKS = import.meta.env.VITE_USE_MOCKS === 'true';
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://api.srpski-online.rs/api/v1';
 
-/**
- * API error with code for i18n mapping.
- */
-export class ApiError extends Error {
-  constructor(
-    public status: number,
-    public code: string,
-    public detail?: string,
-    public errors?: Array<{ field: string; message: string }>
-  ) {
-    super(detail || code);
-    this.name = 'ApiError';
-  }
-
-  static async fromResponse(res: Response): Promise<ApiError> {
-    try {
-      const problem = await res.json();
-      return new ApiError(
-        res.status,
-        problem.code || 'UNKNOWN_ERROR',
-        problem.detail || problem.title,
-        problem.errors
-      );
-    } catch {
-      return new ApiError(res.status, 'NETWORK_ERROR', res.statusText);
-    }
-  }
-}
-
-/**
- * Sleep utility for mock artificial delay (250-550ms).
- */
+/** Artificial mock delay, so loading states are visible and get written (spec 4.3). */
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 /**
- * Resolve mock data for a given path.
- * TODO: Connect to src/mocks/ when mock data files are created.
+ * Answers a request from the mock layer.
+ *
+ * The mock router is imported dynamically so a production build with
+ * VITE_USE_MOCKS=false drops this branch and ships no mock data.
  */
-function resolveMock<T>(path: string): T {
-  // Stub for now — will be implemented when src/mocks/ is created
-  throw new ApiError(404, 'MOCK_NOT_IMPLEMENTED', `Mock for ${path} not implemented yet`);
+async function mockResponse<T>(path: string): Promise<T> {
+  await sleep(250 + Math.random() * 300);
+
+  // Force an error to check error states, e.g. VITE_MOCK_FAIL=/catalog/products
+  if (import.meta.env.VITE_MOCK_FAIL === path) {
+    throw new ApiError(500, 'INTERNAL_ERROR', 'Forced mock error for testing');
+  }
+
+  const { resolveMock } = await import('../mocks');
+  return resolveMock<T>(path);
 }
 
 /**
- * GET request with mock layer support.
+ * Sends a real request and unwraps the response.
+ *
+ * TODO: intercept 401 TOKEN_EXPIRED -> /auth/refresh -> retry, with a promise
+ * lock so parallel requests wait on one refresh (spec 4.5).
  */
-export async function apiGet<T>(path: string): Promise<T> {
-  if (USE_MOCKS) {
-    // Artificial delay to see loading states (250-550ms)
-    await sleep(250 + Math.random() * 300);
-
-    // Allow forcing errors via env variable (e.g., VITE_MOCK_FAIL=/catalog/products)
-    if (import.meta.env.VITE_MOCK_FAIL === path) {
-      throw new ApiError(500, 'INTERNAL_ERROR', 'Forced mock error for testing');
-    }
-
-    return resolveMock<T>(path);
-  }
-
-  // Real API call (not used in Phase 1)
+async function request<T>(method: string, path: string, body?: unknown): Promise<T> {
   const res = await fetch(`${BASE_URL}${path}`, {
-    headers: getAuthHeaders(),
-  });
-
-  if (!res.ok) {
-    throw await ApiError.fromResponse(res);
-  }
-
-  return res.json();
-}
-
-/**
- * POST request with mock layer support.
- */
-export async function apiPost<T>(path: string, body?: unknown): Promise<T> {
-  if (USE_MOCKS) {
-    await sleep(250 + Math.random() * 300);
-
-    if (import.meta.env.VITE_MOCK_FAIL === path) {
-      throw new ApiError(500, 'INTERNAL_ERROR', 'Forced mock error for testing');
-    }
-
-    return resolveMock<T>(path);
-  }
-
-  const res = await fetch(`${BASE_URL}${path}`, {
-    method: 'POST',
+    method,
     headers: {
-      'Content-Type': 'application/json',
-      ...getAuthHeaders(),
+      ...(body === undefined ? {} : { 'Content-Type': 'application/json' }),
+      ...authHeaders(),
     },
-    body: body ? JSON.stringify(body) : undefined,
-  });
-
-  if (!res.ok) {
-    throw await ApiError.fromResponse(res);
-  }
-
-  // 204 No Content
-  if (res.status === 204) {
-    return undefined as T;
-  }
-
-  return res.json();
-}
-
-/**
- * PUT request with mock layer support.
- */
-export async function apiPut<T>(path: string, body?: unknown): Promise<T> {
-  if (USE_MOCKS) {
-    await sleep(250 + Math.random() * 300);
-
-    if (import.meta.env.VITE_MOCK_FAIL === path) {
-      throw new ApiError(500, 'INTERNAL_ERROR', 'Forced mock error for testing');
-    }
-
-    return resolveMock<T>(path);
-  }
-
-  const res = await fetch(`${BASE_URL}${path}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      ...getAuthHeaders(),
-    },
-    body: body ? JSON.stringify(body) : undefined,
+    body: body === undefined ? undefined : JSON.stringify(body),
   });
 
   if (!res.ok) {
@@ -151,47 +65,28 @@ export async function apiPut<T>(path: string, body?: unknown): Promise<T> {
 }
 
 /**
- * DELETE request with mock layer support.
+ * Bearer token header.
+ *
+ * TODO: sessionStorage is the phase 1 choice — it dies with the tab, which is
+ * bad UX but keeps the token out of long-lived storage until we decide.
  */
-export async function apiDelete<T>(path: string): Promise<T> {
-  if (USE_MOCKS) {
-    await sleep(250 + Math.random() * 300);
-
-    if (import.meta.env.VITE_MOCK_FAIL === path) {
-      throw new ApiError(500, 'INTERNAL_ERROR', 'Forced mock error for testing');
-    }
-
-    return resolveMock<T>(path);
-  }
-
-  const res = await fetch(`${BASE_URL}${path}`, {
-    method: 'DELETE',
-    headers: getAuthHeaders(),
-  });
-
-  if (!res.ok) {
-    throw await ApiError.fromResponse(res);
-  }
-
-  if (res.status === 204) {
-    return undefined as T;
-  }
-
-  return res.json();
-}
-
-/**
- * Get auth headers (Bearer token from sessionStorage).
- * TODO: Token refresh logic (401 -> /auth/refresh -> retry original request).
- */
-function getAuthHeaders(): Record<string, string> {
+function authHeaders(): Record<string, string> {
   const token = sessionStorage.getItem('accessToken');
+  return token ? { Authorization: `Bearer ${token}` } : {};
+}
 
-  if (!token) {
-    return {};
-  }
+export async function apiGet<T>(path: string): Promise<T> {
+  return USE_MOCKS ? mockResponse<T>(path) : request<T>('GET', path);
+}
 
-  return {
-    Authorization: `Bearer ${token}`,
-  };
+export async function apiPost<T>(path: string, body?: unknown): Promise<T> {
+  return USE_MOCKS ? mockResponse<T>(path) : request<T>('POST', path, body);
+}
+
+export async function apiPut<T>(path: string, body?: unknown): Promise<T> {
+  return USE_MOCKS ? mockResponse<T>(path) : request<T>('PUT', path, body);
+}
+
+export async function apiDelete<T>(path: string): Promise<T> {
+  return USE_MOCKS ? mockResponse<T>(path) : request<T>('DELETE', path);
 }

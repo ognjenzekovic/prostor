@@ -470,14 +470,14 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/catalog/instructor": {
+    "/catalog/instructors": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Podaci o predavacu (za "O meni" sekciju) */
+        /** Lista mentora */
         get: {
             parameters: {
                 query?: never;
@@ -493,12 +493,241 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["Instructor"];
+                        "application/json": components["schemas"]["InstructorSummary"][];
                     };
                 };
             };
         };
         put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/catalog/instructors/{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Profil mentora sa njegovim programima */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    slug: components["parameters"]["Slug"];
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["InstructorDetail"];
+                    };
+                };
+                404: components["responses"]["NotFound"];
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/blog/posts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Objavljeni tekstovi
+         * @description Blog je glavni SEO kanal. Tekstovi nose iste `grades` i `areas` oznake
+         *     kao proizvodi, sto omogucava unakrsno povezivanje tekst -> program.
+         */
+        get: {
+            parameters: {
+                query?: {
+                    grade?: components["schemas"]["Grade"];
+                    area?: components["schemas"]["SubjectArea"];
+                    tag?: string;
+                    page?: components["parameters"]["Page"];
+                    size?: components["parameters"]["Size"];
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["BlogPostPage"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/blog/posts/{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Ceo tekst */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    slug: components["parameters"]["Slug"];
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["BlogPostDetail"];
+                    };
+                };
+                404: components["responses"]["NotFound"];
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/blog/posts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Svi tekstovi ukljucujuci nacrte */
+        get: {
+            parameters: {
+                query?: {
+                    page?: components["parameters"]["Page"];
+                    size?: components["parameters"]["Size"];
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["BlogPostPage"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        /** Novi tekst */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["BlogPostWriteRequest"];
+                };
+            };
+            responses: {
+                /** @description Kreirano */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["BlogPostDetail"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/blog/posts/{postId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Izmena teksta */
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    postId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["BlogPostWriteRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["BlogPostDetail"];
+                    };
+                };
+            };
+        };
         post?: never;
         delete?: never;
         options?: never;
@@ -1664,11 +1893,12 @@ export interface components {
         };
         Money: {
             /**
-             * Format: int64
-             * @description Iznos u najmanjoj jedinici valute (pare).
-             * @example 150000
+             * @description Decimalni STRING sa tacno 2 decimale. Nikad JSON broj — broj bi u
+             *     JavaScript-u presao u IEEE754 double i izgubio tacnost.
+             *     Frontend ga ne parsira u Number radi racuna; sve obracune radi server.
+             * @example 1499.00
              */
-            amountMinor: number;
+            amount: string;
             /** @example RSD */
             currency: string;
         };
@@ -1708,6 +1938,8 @@ export interface components {
             coverUrl: string;
             lessonCount?: number;
             totalDurationSec?: number;
+            /** @description Denormalizovano radi prikaza na kartici bez dodatnog upita. */
+            instructorNames?: string[];
             /** @description True samo ako je zahtev autentifikovan i korisnik ima pristup. */
             owned?: boolean;
             published?: boolean;
@@ -1721,7 +1953,7 @@ export interface components {
             lessons?: components["schemas"]["Lesson"][];
             /** @description Popunjeno za BUNDLE. */
             includedProducts?: components["schemas"]["ProductSummary"][];
-            instructor?: components["schemas"]["Instructor"];
+            instructors?: components["schemas"]["InstructorSummary"][];
         };
         Lesson: {
             /** Format: uuid */
@@ -1745,10 +1977,9 @@ export interface components {
             areas?: components["schemas"]["SubjectArea"][];
             examPrep?: components["schemas"]["ExamPrep"] | null;
             schoolYear?: string | null;
-            /** Format: int64 */
-            priceMinor: number;
-            /** Format: int64 */
-            compareAtPriceMinor?: number | null;
+            /** @example 1499.00 */
+            price: string;
+            compareAtPrice?: string | null;
             currency: string;
             accessMode?: components["schemas"]["AccessMode"];
             accessDurationDays?: number | null;
@@ -1757,6 +1988,7 @@ export interface components {
             /** Format: uri */
             coverUrl?: string;
             published?: boolean;
+            instructorIds?: string[];
             /** @description Samo za BUNDLE. */
             includedProductIds?: string[];
             whatYouWillLearn?: string[];
@@ -1782,16 +2014,80 @@ export interface components {
             areas?: components["schemas"]["FilterOption"][];
             examPrep?: components["schemas"]["FilterOption"][];
         };
-        Instructor: {
-            /** @example Prof. Ime Prezime */
-            fullName?: string;
+        InstructorSummary: {
+            /** Format: uuid */
+            id: string;
+            /** @example marija-petrovic */
+            slug: string;
+            /** @example Marija Petrovic */
+            fullName: string;
             /** @example Profesor srpskog jezika i knjizevnosti */
             title?: string;
-            bio?: string;
+            shortBio?: string;
             /** Format: uri */
             photoUrl?: string;
+            areas?: components["schemas"]["SubjectArea"][];
             yearsExperience?: number;
-            studentsCount?: number;
+            sortOrder?: number;
+            active?: boolean;
+        };
+        InstructorDetail: components["schemas"]["InstructorSummary"] & {
+            /** @description Markdown. */
+            bio?: string;
+            education?: string[];
+            products?: components["schemas"]["ProductSummary"][];
+            posts?: components["schemas"]["BlogPostSummary"][];
+        };
+        BlogPostSummary: {
+            /** Format: uuid */
+            id: string;
+            /** @example kako-lako-zapamtiti-padeze */
+            slug: string;
+            title: string;
+            excerpt?: string;
+            /** Format: uri */
+            coverUrl?: string | null;
+            author?: components["schemas"]["InstructorSummary"];
+            grades?: components["schemas"]["Grade"][];
+            areas?: components["schemas"]["SubjectArea"][];
+            tags?: string[];
+            readingMinutes?: number;
+            /** Format: date-time */
+            publishedAt: string;
+        };
+        BlogPostDetail: components["schemas"]["BlogPostSummary"] & {
+            contentMarkdown?: string;
+            /** @description Za <meta name="description">. Ako je prazno, koristi se excerpt. */
+            metaDescription?: string;
+            /** @description Programi na koje tekst upucuje — srz SEO strategije. */
+            relatedProducts?: components["schemas"]["ProductSummary"][];
+            relatedPosts?: components["schemas"]["BlogPostSummary"][];
+        };
+        BlogPostWriteRequest: {
+            slug: string;
+            title: string;
+            excerpt?: string;
+            metaDescription?: string;
+            contentMarkdown: string;
+            /** Format: uri */
+            coverUrl?: string | null;
+            /** Format: uuid */
+            authorId?: string;
+            grades?: components["schemas"]["Grade"][];
+            areas?: components["schemas"]["SubjectArea"][];
+            tags?: string[];
+            relatedProductIds?: string[];
+            published?: boolean;
+            /** Format: date-time */
+            publishedAt?: string | null;
+        };
+        BlogPostPage: {
+            content?: components["schemas"]["BlogPostSummary"][];
+            page?: number;
+            size?: number;
+            /** Format: int64 */
+            totalElements?: number;
+            totalPages?: number;
         };
         Testimonial: {
             /** Format: uuid */
@@ -1891,18 +2187,18 @@ export interface components {
             code: string;
             discountType: components["schemas"]["DiscountType"];
             /**
-             * @description Za PERCENT 1-100, za FIXED iznos u parama.
+             * @description Za PERCENT ceo broj 1-100 kao string ('20').
+             *     Za FIXED decimalni iznos sa 2 decimale ('500.00').
              * @example 20
              */
-            value: number;
+            value: string;
             /** Format: date-time */
             validFrom?: string;
             /** Format: date-time */
             validTo?: string;
             maxUses?: number | null;
             readonly usedCount?: number;
-            /** Format: int64 */
-            minSubtotalMinor?: number | null;
+            minSubtotal?: string | null;
             /** @description null = vazi za sve proizvode. */
             appliesToProductIds?: string[] | null;
             active?: boolean;

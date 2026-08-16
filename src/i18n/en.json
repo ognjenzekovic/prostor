@@ -1,1 +1,79 @@
-{}
+{
+  "common": {
+    "brand": "Prostor",
+    "skipToContent": "Skip to content",
+    "underConstruction": "This page is being built."
+  },
+  "locale": {
+    "label": "Language and script",
+    "srLatin": "Srpski (latinica)",
+    "srCyrillic": "Српски (ћирилица)",
+    "en": "English"
+  },
+  "nav": {
+    "primary": "Main navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "catalog": "Courses",
+    "bundles": "Bundles",
+    "examPrep": "Exam prep",
+    "blog": "Blog",
+    "about": "About us",
+    "contact": "Contact",
+    "cart": "Cart",
+    "login": "Sign in"
+  },
+  "footer": {
+    "tagline": "A place to grow.",
+    "learn": "Learn",
+    "about": "About",
+    "legal": "Legal",
+    "malaMatura": "Lower secondary exam",
+    "prijemni": "University entrance exam",
+    "instructors": "Instructors",
+    "terms": "Terms of service",
+    "privacy": "Privacy policy",
+    "returns": "Returns",
+    "copyright": "© {{year}} Prostor. All rights reserved."
+  },
+  "notFound": {
+    "title": "This page does not exist",
+    "body": "The link may be outdated or the address mistyped. Browse the courses or go back to the home page.",
+    "toCatalog": "Browse courses",
+    "toHome": "Go home"
+  },
+  "pages": {
+    "home": "Prostor",
+    "catalog": "Courses",
+    "course": "Course detail",
+    "grade": "By grade",
+    "area": "By subject area",
+    "malaMatura": "Lower secondary exam prep",
+    "prijemni": "Entrance exam prep",
+    "bundles": "Bundles",
+    "about": "About us",
+    "instructors": "Instructors",
+    "instructor": "Instructor profile",
+    "blog": "Blog",
+    "post": "Article",
+    "contact": "Contact",
+    "login": "Sign in",
+    "register": "Sign up",
+    "forgotPassword": "Forgotten password",
+    "cart": "Cart",
+    "checkout": "Checkout",
+    "checkoutSuccess": "Payment confirmation",
+    "checkoutCancelled": "Payment cancelled",
+    "library": "My courses",
+    "classroom": "Classroom",
+    "account": "Account",
+    "orders": "Orders",
+    "admin": "Administration",
+    "adminProducts": "Products",
+    "adminOrders": "Orders",
+    "adminCoupons": "Coupons",
+    "terms": "Terms of service",
+    "privacy": "Privacy policy",
+    "returns": "Returns"
+  }
+}

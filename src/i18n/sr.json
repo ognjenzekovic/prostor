@@ -1,1 +1,79 @@
-{}
+{
+  "common": {
+    "brand": "Prostor",
+    "skipToContent": "Preskoči na sadržaj",
+    "underConstruction": "Ova stranica je u izradi."
+  },
+  "locale": {
+    "label": "Jezik i pismo",
+    "srLatin": "Srpski (latinica)",
+    "srCyrillic": "Српски (ћирилица)",
+    "en": "English"
+  },
+  "nav": {
+    "primary": "Glavna navigacija",
+    "openMenu": "Otvori meni",
+    "closeMenu": "Zatvori meni",
+    "catalog": "Kursevi",
+    "bundles": "Paketi",
+    "examPrep": "Priprema",
+    "blog": "Blog",
+    "about": "Ko smo mi",
+    "contact": "Kontakt",
+    "cart": "Korpa",
+    "login": "Prijava"
+  },
+  "footer": {
+    "tagline": "Mesto za tvoj rast.",
+    "learn": "Učenje",
+    "about": "O nama",
+    "legal": "Pravno",
+    "malaMatura": "Mala matura",
+    "prijemni": "Prijemni ispit",
+    "instructors": "Mentori",
+    "terms": "Uslovi korišćenja",
+    "privacy": "Politika privatnosti",
+    "returns": "Reklamacije",
+    "copyright": "© {{year}} Prostor. Sva prava zadržana."
+  },
+  "notFound": {
+    "title": "Ova stranica ne postoji",
+    "body": "Možda je link zastareo ili je adresa pogrešno ukucana. Pogledaj kurseve ili se vrati na početnu.",
+    "toCatalog": "Pogledaj kurseve",
+    "toHome": "Na početnu"
+  },
+  "pages": {
+    "home": "Prostor",
+    "catalog": "Kursevi",
+    "course": "Detalj kursa",
+    "grade": "Gradivo po razredu",
+    "area": "Gradivo po oblasti",
+    "malaMatura": "Priprema za malu maturu",
+    "prijemni": "Priprema za prijemni",
+    "bundles": "Paketi",
+    "about": "Ko smo mi",
+    "instructors": "Mentori",
+    "instructor": "Profil mentora",
+    "blog": "Blog",
+    "post": "Tekst",
+    "contact": "Kontakt",
+    "login": "Prijava",
+    "register": "Registracija",
+    "forgotPassword": "Zaboravljena lozinka",
+    "cart": "Korpa",
+    "checkout": "Plaćanje",
+    "checkoutSuccess": "Potvrda plaćanja",
+    "checkoutCancelled": "Plaćanje otkazano",
+    "library": "Moji kursevi",
+    "classroom": "Učionica",
+    "account": "Nalog",
+    "orders": "Porudžbine",
+    "admin": "Administracija",
+    "adminProducts": "Proizvodi",
+    "adminOrders": "Porudžbine",
+    "adminCoupons": "Kuponi",
+    "terms": "Uslovi korišćenja",
+    "privacy": "Politika privatnosti",
+    "returns": "Reklamacije"
+  }
+}
