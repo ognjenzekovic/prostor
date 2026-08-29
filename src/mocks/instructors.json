@@ -1,0 +1,35 @@
+[
+  {
+    "id": "3c1b0a20-0000-4000-8000-000000000001",
+    "slug": "marija-petrovic",
+    "fullName": "Marija Petrović",
+    "title": "Profesor srpskog jezika i književnosti",
+    "shortBio": "Četrnaest godina u osnovnoj školi i pripremi za malu maturu. Predaje gramatiku i pravopis tako da se pravilo vidi na primeru pre nego što dobije ime.",
+    "areas": ["GRAMATIKA", "PRAVOPIS"],
+    "yearsExperience": 14,
+    "sortOrder": 1,
+    "active": true
+  },
+  {
+    "id": "3c1b0a20-0000-4000-8000-000000000002",
+    "slug": "jelena-ilic",
+    "fullName": "Jelena Ilić",
+    "title": "Profesor književnosti",
+    "shortBio": "Radi sa osmacima i maturantima na tumačenju književnog teksta. Vodi lektiru i pripremu za prijemni iz književnosti.",
+    "areas": ["KNJIZEVNOST", "LEKTIRA"],
+    "yearsExperience": 9,
+    "sortOrder": 2,
+    "active": true
+  },
+  {
+    "id": "3c1b0a20-0000-4000-8000-000000000003",
+    "slug": "nikola-jovanovic",
+    "fullName": "Nikola Jovanović",
+    "title": "Profesor srpskog jezika",
+    "shortBio": "Pismeno izražavanje i govorne vežbe. Radi na tome da učenik napiše sastav koji ima uvod, sredinu i kraj, a ne tri pasusa prepričavanja.",
+    "areas": ["PISMENO_IZRAZAVANJE", "GOVORNE_VEZBE"],
+    "yearsExperience": 7,
+    "sortOrder": 3,
+    "active": true
+  }
+]

@@ -133,6 +133,7 @@ p {
   *,
   *::before,
   *::after {
+    animation-delay: 0ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -142,3 +143,49 @@ p {
 #root {
   min-height: 100vh;
 }
+
+/* Hero scene: lock -> hand unlocking it -> the same frame becomes a bookcase
+   whose spines carry the name.
+   The headline, subhead and CTA are separate DOM and readable from first
+   paint — the scene plays beside them, never over them (docs/06 §6.5).
+   The reduced-motion rule above collapses every step, and `forwards` leaves
+   the bookcase on screen, so the resting state is identical either way. */
+@keyframes hero-lock {
+  0%, 44% { opacity: 1; }
+  60%, 100% { opacity: 0; }
+}
+
+@keyframes hero-key {
+  0% { opacity: 0; transform: translateX(70px); }
+  14%, 40% { opacity: 1; }
+  32%, 44% { transform: translateX(0); }
+  70%, 100% { opacity: 0; transform: translateX(70px); }
+}
+
+@keyframes hero-book {
+  0%, 58% { opacity: 0; transform: translateY(24px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes hero-plank {
+  0%, 54% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.hero-lock,
+.hero-key,
+.hero-book,
+.hero-plank {
+  transform-box: view-box;
+  animation-duration: 3.2s;
+  animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+  animation-fill-mode: both;
+}
+
+.hero-lock { animation-name: hero-lock; }
+.hero-key { animation-name: hero-key; }
+.hero-plank { animation-name: hero-plank; }
+
+/* Each book carries its own animation-delay inline, so the order is set
+   where the shelves are laid out rather than duplicated here. */
+.hero-book { animation-name: hero-book; }

@@ -166,5 +166,48 @@
     "terms": "Terms of service",
     "privacy": "Privacy policy",
     "returns": "Returns"
+  },
+  "home": {
+    "hero": {
+      "title": "A place to grow",
+      "subtitle": "Recorded lessons in Serbian language and literature — from grade 5 to the university entrance exam. Watch at your own pace, as many times as you need.",
+      "note": "“Knowledge and skill are things nobody can take away from you.”",
+      "primary": "Browse courses",
+      "secondary": "Lower secondary exam prep",
+      "sceneAlt": "A lock being opened by a hand, turning into a bookshelf whose spines spell PROSTOR"
+    },
+    "courses": {
+      "title": "Most popular programmes",
+      "all": "All courses"
+    },
+    "blog": {
+      "title": "From the reading shelf",
+      "all": "All articles",
+      "error": {
+        "title": "Articles could not be loaded",
+        "description": "Something went wrong while loading them. Please try again."
+      }
+    },
+    "acrostic": {
+      "question": "Who are we?",
+      "answer": "Mentors",
+      "imageAlt": "The PROSTOR acrostic: Proactive, Reasonable, Responsible, Systematic, Tolerant, Organised, Realistic — circled initials joined into a descending chain."
+    },
+    "instructors": {
+      "title": "Mentors",
+      "error": {
+        "title": "Mentors could not be loaded",
+        "description": "Something went wrong while loading them. Please try again."
+      }
+    },
+    "cta": {
+      "title": "Start with what you need right now",
+      "description": "Pick a grade or a subject area and see what we cover.",
+      "action": "Browse courses"
+    }
+  },
+  "blog": {
+    "readingMinutes_one": "{{count}} minute read",
+    "readingMinutes_other": "{{count}} minute read"
   }
 }

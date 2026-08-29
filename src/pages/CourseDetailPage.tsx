@@ -119,7 +119,7 @@ export function CourseDetailPage() {
           {product.whatYouWillLearn && product.whatYouWillLearn.length > 0 && (
             <section className="mt-10">
               <h2>{t('course.whatYouWillLearn')}</h2>
-              <ul className="mt-4 max-w-prose list-disc pl-5 text-neutral-700 marker:text-brand-600">
+              <ul className="mt-4 max-w-prose list-disc pl-5 text-neutral-700 marker:text-neutral-500">
                 {product.whatYouWillLearn.map((item) => (
                   <li key={item} className="mt-1">
                     {item}
@@ -132,7 +132,7 @@ export function CourseDetailPage() {
           {product.lessons && product.lessons.length > 0 && (
             <section className="mt-10">
               <h2>{t('course.lessons')}</h2>
-              <p className="mt-2 text-sm text-neutral-500">
+              <p className="mt-2 text-sm text-neutral-700">
                 {t('course.lessonsNote', { count: product.lessons.length })}
               </p>
               <div className="mt-4">
@@ -157,7 +157,7 @@ export function CourseDetailPage() {
           {product.requirements && product.requirements.length > 0 && (
             <section className="mt-10">
               <h2>{t('course.requirements')}</h2>
-              <ul className="mt-4 max-w-prose list-disc pl-5 text-neutral-700 marker:text-brand-600">
+              <ul className="mt-4 max-w-prose list-disc pl-5 text-neutral-700 marker:text-neutral-500">
                 {product.requirements.map((item) => (
                   <li key={item} className="mt-1">
                     {item}
@@ -186,7 +186,7 @@ export function CourseDetailPage() {
                     <div>
                       <p className="font-medium text-neutral-900">{instructor.fullName}</p>
                       {instructor.title && (
-                        <p className="text-sm text-neutral-500">{instructor.title}</p>
+                        <p className="text-sm text-neutral-700">{instructor.title}</p>
                       )}
                       {instructor.shortBio && (
                         <p className="mt-1 max-w-prose text-sm text-neutral-700">
@@ -223,7 +223,7 @@ export function CourseDetailPage() {
                 {formatMoney(product.price, locale)}
               </span>
               {product.compareAtPrice && (
-                <s className="price text-neutral-500">
+                <s className="price text-neutral-700">
                   {formatMoney(product.compareAtPrice, locale)}
                 </s>
               )}
@@ -233,13 +233,13 @@ export function CourseDetailPage() {
           <dl className="mt-6 flex flex-col gap-3 border-t border-neutral-900/12 pt-6 text-sm">
             {access && (
               <div className="flex justify-between gap-4">
-                <dt className="text-neutral-500">{t('course.access')}</dt>
+                <dt className="text-neutral-700">{t('course.access')}</dt>
                 <dd className="text-right text-neutral-900">{t(access.key, access.params)}</dd>
               </div>
             )}
             {product.lessonCount && (
               <div className="flex justify-between gap-4">
-                <dt className="text-neutral-500">{t('course.lessonCount')}</dt>
+                <dt className="text-neutral-700">{t('course.lessonCount')}</dt>
                 <dd className="text-neutral-900">
                   {t('product.lessons', { count: product.lessonCount })}
                 </dd>
@@ -247,7 +247,7 @@ export function CourseDetailPage() {
             )}
             {duration && (
               <div className="flex justify-between gap-4">
-                <dt className="text-neutral-500">{t('course.duration')}</dt>
+                <dt className="text-neutral-700">{t('course.duration')}</dt>
                 <dd className="text-neutral-900">
                   {duration.hours > 0
                     ? t('product.durationHours', duration)
@@ -257,7 +257,7 @@ export function CourseDetailPage() {
             )}
             {product.schoolYear && (
               <div className="flex justify-between gap-4">
-                <dt className="text-neutral-500">{t('course.schoolYear')}</dt>
+                <dt className="text-neutral-700">{t('course.schoolYear')}</dt>
                 <dd className="text-neutral-900">{product.schoolYear}</dd>
               </div>
             )}

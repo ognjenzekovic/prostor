@@ -58,7 +58,7 @@ export function CatalogPage() {
           />
         ) : (
           <>
-            <p className="mb-4 text-sm text-neutral-500">
+            <p className="mb-4 text-sm text-neutral-700">
               {t('catalog.count', { count: data.totalElements })}
             </p>
             <ProductGrid products={data.content} />

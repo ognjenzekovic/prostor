@@ -3,6 +3,7 @@ import { RootLayout } from '../components/layout/RootLayout';
 import { NotFoundPage } from '../pages/NotFoundPage';
 import { CatalogPage } from '../pages/CatalogPage';
 import { CourseDetailPage } from '../pages/CourseDetailPage';
+import { HomePage } from '../pages/HomePage';
 import { routes } from '../lib/routes';
 import {
   AboutPage,
@@ -22,7 +23,6 @@ import {
   ContactPage,
   ForgotPasswordPage,
   GradePage,
-  HomePage,
   InstructorPage,
   InstructorsPage,
   LibraryPage,

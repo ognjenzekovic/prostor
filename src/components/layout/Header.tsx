@@ -17,7 +17,7 @@ const NAV_ITEMS = [
 
 function navLinkClass({ isActive }: { isActive: boolean }): string {
   return isActive
-    ? 'text-neutral-900 underline decoration-brand-600 decoration-2 underline-offset-8'
+    ? 'text-neutral-900 underline decoration-neutral-900 decoration-2 underline-offset-8'
     : 'text-neutral-700 hover:text-neutral-900';
 }
 
@@ -37,7 +37,10 @@ export function Header() {
   }
 
   return (
-    <header className="border-b border-neutral-900/12 bg-neutral-50">
+    // neutral-100, not the page's neutral-50: at the same value the bar is
+    // held together only by its hairline. Header and footer now bracket the
+    // page in the same tone.
+    <header className="border-b border-neutral-900/12 bg-neutral-100">
       <Container className="flex items-center justify-between gap-4 py-4">
         {/* TODO: replace the wordmark with the owl logo once the SVG arrives (docs/06.4). */}
         <Link

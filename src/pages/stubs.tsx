@@ -8,7 +8,6 @@ import { PagePlaceholder } from './PagePlaceholder';
  * src/pages/<Name>.tsx and its export is deleted from here.
  */
 
-export const HomePage = () => <PagePlaceholder titleKey="pages.home" />;
 export const GradePage = () => <PagePlaceholder titleKey="pages.grade" />;
 export const AreaPage = () => <PagePlaceholder titleKey="pages.area" />;
 export const MalaMaturaPage = () => <PagePlaceholder titleKey="pages.malaMatura" />;

@@ -2,6 +2,8 @@ import type { components } from '../api/schema';
 import { ApiError } from '../api/errors';
 import productsPage from './products.json';
 import productDetails from './product-details.json';
+import instructors from './instructors.json';
+import blogPosts from './blog-posts.json';
 
 /**
  * Mock router — the fake backend for phase 1 (spec 4.2, 4.3).
@@ -14,6 +16,9 @@ import productDetails from './product-details.json';
 type ProductSummary = components['schemas']['ProductSummary'];
 type ProductDetail = components['schemas']['ProductDetail'];
 type ProductPage = components['schemas']['ProductPage'];
+type InstructorSummary = components['schemas']['InstructorSummary'];
+type BlogPostPage = components['schemas']['BlogPostPage'];
+type BlogPostSummary = components['schemas']['BlogPostSummary'];
 type Grade = components['schemas']['Grade'];
 type SubjectArea = components['schemas']['SubjectArea'];
 
@@ -30,6 +35,8 @@ type DetailSource = Omit<ProductDetail, keyof ProductSummary> & {
 
 const ALL_PRODUCTS = productsPage.content as ProductSummary[];
 const DETAILS = productDetails as unknown as Record<string, DetailSource>;
+const ALL_INSTRUCTORS = instructors as InstructorSummary[];
+const ALL_POSTS = (blogPosts.content ?? []) as BlogPostSummary[];
 const DEFAULT_SIZE = 12;
 
 type MockHandler = (path: string, query: URLSearchParams) => unknown;
@@ -38,6 +45,8 @@ type MockHandler = (path: string, query: URLSearchParams) => unknown;
 const EXACT: Record<string, MockHandler> = {
   '/catalog/products': (_path, query) => listProducts(query),
   '/catalog/filters': () => buildFilters(),
+  '/catalog/instructors': () => ALL_INSTRUCTORS,
+  '/blog/posts': (_path, query) => listBlogPosts(query),
 };
 
 /** Prefix handlers for paths that carry an id or slug. */
@@ -46,7 +55,58 @@ const PREFIXED: Array<{ prefix: string; handle: MockHandler }> = [
     prefix: '/catalog/products/',
     handle: (path) => getProductDetail(path.slice('/catalog/products/'.length)),
   },
+  {
+    prefix: '/catalog/instructors/',
+    handle: (path) => getInstructorDetail(path.slice('/catalog/instructors/'.length)),
+  },
 ];
+
+/**
+ * GET /catalog/instructors/{slug}.
+ *
+ * The instructor's programmes are derived from the areas they teach, so the
+ * profile cannot list a course the catalogue does not have.
+ */
+function getInstructorDetail(slug: string) {
+  const instructor = ALL_INSTRUCTORS.find((candidate) => candidate.slug === slug);
+
+  if (!instructor) {
+    throw new ApiError(404, 'INSTRUCTOR_NOT_FOUND', `Nema mentora sa slug-om "${slug}"`);
+  }
+
+  return {
+    ...instructor,
+    products: ALL_PRODUCTS.filter((product) =>
+      product.areas?.some((area) => instructor.areas?.includes(area))
+    ),
+  };
+}
+
+/** GET /blog/posts — newest first, then sliced into a page. */
+function listBlogPosts(query: URLSearchParams): BlogPostPage {
+  const area = query.get('area');
+  const grade = query.get('grade');
+
+  const matched = [...ALL_POSTS]
+    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+    .filter((post) => {
+      if (area && !post.areas?.includes(area as SubjectArea)) return false;
+      if (grade && !post.grades?.includes(grade as Grade)) return false;
+      return true;
+    });
+
+  const size = Number(query.get('size')) || DEFAULT_SIZE;
+  const page = Number(query.get('page')) || 0;
+  const start = page * size;
+
+  return {
+    content: matched.slice(start, start + size),
+    page,
+    size,
+    totalElements: matched.length,
+    totalPages: Math.ceil(matched.length / size),
+  };
+}
 
 /**
  * GET /catalog/products/{slug} — summary plus the detail-only fields.

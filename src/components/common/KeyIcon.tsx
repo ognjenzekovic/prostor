@@ -10,7 +10,7 @@ export type KeyState = 'locked' | 'preview' | 'unlocked';
 const COLOR: Record<KeyState, string> = {
   locked: 'text-neutral-500',
   preview: 'text-neutral-700',
-  unlocked: 'text-brand-600',
+  unlocked: 'text-neutral-900',
 };
 
 export function KeyIcon({ state, className = '' }: { state: KeyState; className?: string }) {

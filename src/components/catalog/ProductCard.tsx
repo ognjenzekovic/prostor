@@ -63,7 +63,7 @@ export function ProductCard({ product }: { product: ProductSummary }) {
           <p className="line-clamp-2 text-sm text-neutral-700">{product.shortDescription}</p>
         )}
 
-        <p className="text-sm text-neutral-500">
+        <p className="text-sm text-neutral-700">
           {[
             product.lessonCount ? t('product.lessons', { count: product.lessonCount }) : null,
             duration
@@ -85,7 +85,7 @@ export function ProductCard({ product }: { product: ProductSummary }) {
                 {formatMoney(product.price, locale)}
               </span>
               {product.compareAtPrice && (
-                <s className="price text-sm text-neutral-500">
+                <s className="price text-sm text-neutral-700">
                   {formatMoney(product.compareAtPrice, locale)}
                 </s>
               )}

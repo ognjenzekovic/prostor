@@ -33,7 +33,7 @@ export function LessonList({ lessons, slug, owned }: LessonListProps) {
         const openable = state !== 'locked';
 
         const title = (
-          <span className={state === 'locked' ? 'text-neutral-500' : 'text-neutral-900'}>
+          <span className={state === 'locked' ? 'text-neutral-700' : 'text-neutral-900'}>
             {lesson.title}
           </span>
         );
@@ -42,7 +42,7 @@ export function LessonList({ lessons, slug, owned }: LessonListProps) {
           <li key={lesson.videoId} className="flex items-center gap-3 px-4 py-3">
             <KeyIcon state={state} className="shrink-0" />
 
-            <span className="w-6 shrink-0 text-sm text-neutral-500 tabular-nums">{index + 1}.</span>
+            <span className="w-6 shrink-0 text-sm text-neutral-700 tabular-nums">{index + 1}.</span>
 
             <div className="min-w-0 flex-1">
               {/* A locked lesson is not a link: sending someone to a player
@@ -54,13 +54,13 @@ export function LessonList({ lessons, slug, owned }: LessonListProps) {
               )}
 
               {state === 'preview' && (
-                <span className="ml-2 rounded-sm bg-brand-100 px-2 py-0.5 text-xs text-neutral-900">
+                <span className="ml-2 rounded-sm border border-neutral-900/15 px-2 py-0.5 text-xs text-neutral-700">
                   {t('lesson.freePreview')}
                 </span>
               )}
             </div>
 
-            <span className="shrink-0 text-sm text-neutral-500 tabular-nums">
+            <span className="shrink-0 text-sm text-neutral-700 tabular-nums">
               {duration.hours > 0
                 ? t('product.durationHours', duration)
                 : t('product.durationMinutes', duration)}

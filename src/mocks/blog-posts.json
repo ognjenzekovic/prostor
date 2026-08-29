@@ -1,0 +1,44 @@
+{
+  "content": [
+    {
+      "id": "5d2c0b30-0000-4000-8000-000000000001",
+      "slug": "kako-lako-zapamtiti-padeze",
+      "title": "Kako lako zapamtiti padeže",
+      "excerpt": "Pitanja uz padeže rade bolje od tabele — ali samo ako se nauče u pravom redosledu. Evo kako.",
+      "coverUrl": null,
+      "grades": ["OS_6", "OS_7"],
+      "areas": ["GRAMATIKA"],
+      "tags": ["padezi", "gramatika"],
+      "readingMinutes": 6,
+      "publishedAt": "2026-08-04T09:00:00Z"
+    },
+    {
+      "id": "5d2c0b30-0000-4000-8000-000000000002",
+      "slug": "zarez-pet-pravila",
+      "title": "Zarez: pet pravila koja pokrivaju većinu grešaka",
+      "excerpt": "Nema potrebe pamtiti sve. Pet situacija objašnjava skoro sve zareze koji se pogrešno pišu u školskim sastavima.",
+      "coverUrl": null,
+      "grades": ["OS_7", "OS_8", "SS_1"],
+      "areas": ["PRAVOPIS"],
+      "tags": ["pravopis", "zarez"],
+      "readingMinutes": 8,
+      "publishedAt": "2026-07-21T09:00:00Z"
+    },
+    {
+      "id": "5d2c0b30-0000-4000-8000-000000000003",
+      "slug": "kako-se-pise-prikaz-lektire",
+      "title": "Kako se piše prikaz lektire (a da nije prepričavanje)",
+      "excerpt": "Razlika između prepričavanja i prikaza je jedno pitanje koje treba postaviti posle svakog poglavlja.",
+      "coverUrl": null,
+      "grades": ["OS_8"],
+      "areas": ["LEKTIRA", "KNJIZEVNOST"],
+      "tags": ["lektira", "pisanje"],
+      "readingMinutes": 7,
+      "publishedAt": "2026-06-30T09:00:00Z"
+    }
+  ],
+  "page": 0,
+  "size": 12,
+  "totalElements": 3,
+  "totalPages": 1
+}

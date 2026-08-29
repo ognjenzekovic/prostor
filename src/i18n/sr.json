@@ -169,5 +169,49 @@
     "terms": "Uslovi korišćenja",
     "privacy": "Politika privatnosti",
     "returns": "Reklamacije"
+  },
+  "home": {
+    "hero": {
+      "title": "Mesto za tvoj rast",
+      "subtitle": "Snimljene lekcije iz srpskog jezika i književnosti — od 5. razreda do prijemnog ispita. Gledaš svojim tempom, onoliko puta koliko treba.",
+      "note": "„Znanje i veština su vrednosti koje ti niko ne može oduzeti.“",
+      "primary": "Pogledaj kurseve",
+      "secondary": "Priprema za malu maturu",
+      "sceneAlt": "Brava koju ruka otključava i koja se otvara u policu sa knjigama; na hrbatima knjiga piše PROSTOR"
+    },
+    "courses": {
+      "title": "Najtraženiji programi",
+      "all": "Svi kursevi"
+    },
+    "blog": {
+      "title": "Sa police za čitanje",
+      "all": "Svi tekstovi",
+      "error": {
+        "title": "Tekstovi ne mogu da se učitaju",
+        "description": "Došlo je do greške pri učitavanju. Pokušaj ponovo."
+      }
+    },
+    "acrostic": {
+      "question": "Ko smo mi?",
+      "answer": "Mentori",
+      "imageAlt": "Akrostih PROSTOR: Proaktivni, Razumni, Odgovorni, Sistematični, Tolerantni, Organizovani, Realni — inicijali u zaokruženim slovima, povezani u niz koji se spušta."
+    },
+    "instructors": {
+      "title": "Mentori",
+      "error": {
+        "title": "Mentori ne mogu da se učitaju",
+        "description": "Došlo je do greške pri učitavanju. Pokušaj ponovo."
+      }
+    },
+    "cta": {
+      "title": "Počni od onoga što ti sada treba",
+      "description": "Izaberi razred ili oblast i pogledaj šta pokrivamo.",
+      "action": "Pogledaj kurseve"
+    }
+  },
+  "blog": {
+    "readingMinutes_one": "{{count}} minut čitanja",
+    "readingMinutes_few": "{{count}} minuta čitanja",
+    "readingMinutes_other": "{{count}} minuta čitanja"
   }
 }
