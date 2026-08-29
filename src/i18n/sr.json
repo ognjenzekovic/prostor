@@ -2,7 +2,101 @@
   "common": {
     "brand": "Prostor",
     "skipToContent": "Preskoči na sadržaj",
-    "underConstruction": "Ova stranica je u izradi."
+    "underConstruction": "Ova stranica je u izradi.",
+    "retry": "Pokušaj ponovo"
+  },
+  "catalog": {
+    "title": "Kursevi",
+    "subtitle": "Gradivo srpskog jezika i književnosti, po razredu i oblasti. Snimljene lekcije koje gledaš svojim tempom.",
+    "count_one": "{{count}} program",
+    "count_few": "{{count}} programa",
+    "count_other": "{{count}} programa",
+    "empty": {
+      "title": "Nema programa koji odgovaraju pretrazi",
+      "description": "Nijedan program ne odgovara onome što si tražio. Probaj bez filtera ili pogledaj ceo katalog.",
+      "action": "Prikaži sve programe"
+    },
+    "error": {
+      "title": "Katalog ne može da se učita",
+      "description": "Došlo je do greške pri učitavanju programa. Proveri internet vezu i pokušaj ponovo."
+    }
+  },
+  "course": {
+    "whatYouWillLearn": "Šta ćeš naučiti",
+    "lessons": "Sadržaj",
+    "lessonsNote_one": "{{count}} lekcija",
+    "lessonsNote_few": "{{count}} lekcije",
+    "lessonsNote_other": "{{count}} lekcija",
+    "included": "Šta paket sadrži",
+    "requirements": "Šta treba da znaš unapred",
+    "instructors": "Ko predaje",
+    "continue": "Nastavi učenje",
+    "access": "Pristup",
+    "lessonCount": "Lekcija",
+    "duration": "Trajanje",
+    "schoolYear": "Školska godina",
+    "notFound": {
+      "title": "Ovaj program ne postoji",
+      "description": "Možda je link zastareo ili je program uklonjen iz ponude. Pogledaj šta je trenutno dostupno.",
+      "action": "Pogledaj kurseve"
+    },
+    "error": {
+      "title": "Program ne može da se učita",
+      "description": "Došlo je do greške pri učitavanju. Proveri internet vezu i pokušaj ponovo."
+    }
+  },
+  "lesson": {
+    "freePreview": "Besplatna lekcija"
+  },
+  "product": {
+    "owned": "Već imate pristup",
+    "lessons_one": "{{count}} lekcija",
+    "lessons_few": "{{count}} lekcije",
+    "lessons_other": "{{count}} lekcija",
+    "durationHours": "{{hours}} h {{minutes}} min",
+    "durationMinutes": "{{minutes}} min"
+  },
+  "access": {
+    "lifetime": "Doživotan pristup",
+    "days": "Pristup {{days}} dana",
+    "untilDate": "Važi do {{date}}"
+  },
+  "pagination": {
+    "label": "Paginacija",
+    "previous": "Prethodna",
+    "next": "Sledeća",
+    "position": "Strana {{page}} od {{totalPages}}"
+  },
+  "enums": {
+    "grade": {
+      "OS_5": "5. razred",
+      "OS_6": "6. razred",
+      "OS_7": "7. razred",
+      "OS_8": "8. razred",
+      "SS_1": "1. srednje",
+      "SS_2": "2. srednje",
+      "SS_3": "3. srednje",
+      "SS_4": "4. srednje"
+    },
+    "area": {
+      "GRAMATIKA": "Gramatika",
+      "PRAVOPIS": "Pravopis",
+      "KNJIZEVNOST": "Književnost",
+      "LEKTIRA": "Lektira",
+      "PISMENO_IZRAZAVANJE": "Pismeno izražavanje",
+      "GOVORNE_VEZBE": "Govorne vežbe"
+    },
+    "examPrep": {
+      "MALA_MATURA": "Mala matura",
+      "UPIS_SREDNJA": "Upis u srednju",
+      "MATURA": "Matura",
+      "PRIJEMNI_FAKULTET": "Prijemni ispit"
+    },
+    "productType": {
+      "VIDEO": "Lekcija",
+      "COURSE": "Kurs",
+      "BUNDLE": "Paket"
+    }
   },
   "locale": {
     "label": "Jezik i pismo",

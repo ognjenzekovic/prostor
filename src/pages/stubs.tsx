@@ -4,14 +4,11 @@ import { PagePlaceholder } from './PagePlaceholder';
  * Every route from spec 4.4 that has no screen yet.
  *
  * They live in one file on purpose: each one is a title and nothing else, and
- * this file shrinks as pages get built (CatalogPage next, then
- * CourseDetailPage). When a page becomes real it moves to src/pages/<Name>.tsx
- * and its export is deleted from here.
+ * this file shrinks as pages get built. When a page becomes real it moves to
+ * src/pages/<Name>.tsx and its export is deleted from here.
  */
 
 export const HomePage = () => <PagePlaceholder titleKey="pages.home" />;
-export const CatalogPage = () => <PagePlaceholder titleKey="pages.catalog" />;
-export const CourseDetailPage = () => <PagePlaceholder titleKey="pages.course" />;
 export const GradePage = () => <PagePlaceholder titleKey="pages.grade" />;
 export const AreaPage = () => <PagePlaceholder titleKey="pages.area" />;
 export const MalaMaturaPage = () => <PagePlaceholder titleKey="pages.malaMatura" />;

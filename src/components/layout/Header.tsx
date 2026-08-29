@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Container } from './Container';
 import { LocaleSwitcher } from './LocaleSwitcher';
+import { LinkButton } from '../common/Button';
 import { useT } from '../../hooks/useT';
 import { routes } from '../../lib/routes';
 
@@ -63,12 +64,7 @@ export function Header() {
           <NavLink to={routes.cart()} className={navLinkClass}>
             {t('nav.cart')}
           </NavLink>
-          <Link
-            to={routes.login()}
-            className="rounded-sm bg-brand-500 px-4 py-2 text-sm font-medium text-neutral-900"
-          >
-            {t('nav.login')}
-          </Link>
+          <LinkButton to={routes.login()}>{t('nav.login')}</LinkButton>
         </div>
 
         <button
@@ -106,12 +102,7 @@ export function Header() {
 
             <div className="mt-4 flex items-center justify-between gap-4">
               <LocaleSwitcher />
-              <Link
-                to={routes.login()}
-                className="rounded-sm bg-brand-500 px-4 py-2 text-sm font-medium text-neutral-900"
-              >
-                {t('nav.login')}
-              </Link>
+              <LinkButton to={routes.login()}>{t('nav.login')}</LinkButton>
             </div>
           </Container>
         </div>

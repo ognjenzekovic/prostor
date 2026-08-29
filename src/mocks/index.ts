@@ -1,5 +1,7 @@
+import type { components } from '../api/schema';
 import { ApiError } from '../api/errors';
 import productsPage from './products.json';
+import productDetails from './product-details.json';
 
 /**
  * Mock router — the fake backend for phase 1 (spec 4.2, 4.3).
@@ -9,11 +11,32 @@ import productsPage from './products.json';
  * invents a field turns phase 3 into a rewrite of every component.
  */
 
+type ProductSummary = components['schemas']['ProductSummary'];
+type ProductDetail = components['schemas']['ProductDetail'];
+type ProductPage = components['schemas']['ProductPage'];
+type Grade = components['schemas']['Grade'];
+type SubjectArea = components['schemas']['SubjectArea'];
+
+/**
+ * The extra fields a detail response carries on top of the summary.
+ *
+ * `includedProductSlugs` is the only thing here that is not in the contract:
+ * it keeps the mock file readable, and gets resolved into real
+ * `includedProducts` before the response leaves this module.
+ */
+type DetailSource = Omit<ProductDetail, keyof ProductSummary> & {
+  includedProductSlugs?: string[];
+};
+
+const ALL_PRODUCTS = productsPage.content as ProductSummary[];
+const DETAILS = productDetails as unknown as Record<string, DetailSource>;
+const DEFAULT_SIZE = 12;
+
 type MockHandler = (path: string, query: URLSearchParams) => unknown;
 
 /** Exact-path handlers, checked before the prefix ones. */
 const EXACT: Record<string, MockHandler> = {
-  '/catalog/products': () => productsPage,
+  '/catalog/products': (_path, query) => listProducts(query),
   '/catalog/filters': () => buildFilters(),
 };
 
@@ -21,32 +44,109 @@ const EXACT: Record<string, MockHandler> = {
 const PREFIXED: Array<{ prefix: string; handle: MockHandler }> = [
   {
     prefix: '/catalog/products/',
-    handle: (path) => {
-      const slug = path.slice('/catalog/products/'.length);
-      const product = productsPage.content.find((p) => p.slug === slug);
-
-      if (!product) {
-        throw new ApiError(404, 'PRODUCT_NOT_FOUND', `Nema proizvoda sa slug-om "${slug}"`);
-      }
-
-      return product;
-    },
+    handle: (path) => getProductDetail(path.slice('/catalog/products/'.length)),
   },
 ];
+
+/**
+ * GET /catalog/products/{slug} — summary plus the detail-only fields.
+ *
+ * A COURSE carries `lessons`, a BUNDLE carries `includedProducts`; both come
+ * from the same file so lesson counts and durations cannot drift apart from
+ * the summary the catalog card shows.
+ */
+function getProductDetail(slug: string): ProductDetail {
+  const summary = ALL_PRODUCTS.find((product) => product.slug === slug);
+
+  if (!summary) {
+    throw new ApiError(404, 'PRODUCT_NOT_FOUND', `Nema proizvoda sa slug-om "${slug}"`);
+  }
+
+  const { includedProductSlugs, ...detail } = DETAILS[slug] ?? {};
+
+  return {
+    ...summary,
+    ...detail,
+    ...(includedProductSlugs && {
+      includedProducts: includedProductSlugs.flatMap((included) =>
+        ALL_PRODUCTS.filter((product) => product.slug === included)
+      ),
+    }),
+  };
+}
+
+/** Case-insensitive, diacritic-tolerant enough for a mock search box. */
+function matchesQuery(product: ProductSummary, q: string): boolean {
+  const haystack = `${product.title} ${product.shortDescription ?? ''}`.toLowerCase();
+  return haystack.includes(q.toLowerCase());
+}
+
+/**
+ * Sorting.
+ *
+ * Number(amount) is safe here and only here: this stands in for the server,
+ * which is the side allowed to do arithmetic on money (spec 4.5a).
+ * ProductSummary carries no timestamp, so 'newest' is the reverse of the file
+ * order — the real endpoint sorts by createdAt.
+ */
+function sortProducts(products: ProductSummary[], sort: string | null): ProductSummary[] {
+  switch (sort) {
+    case 'priceAsc':
+      return [...products].sort((a, b) => Number(a.price.amount) - Number(b.price.amount));
+    case 'priceDesc':
+      return [...products].sort((a, b) => Number(b.price.amount) - Number(a.price.amount));
+    case 'newest':
+      return [...products].reverse();
+    default:
+      return products;
+  }
+}
+
+/** GET /catalog/products — filter, sort, then slice into a page. */
+function listProducts(query: URLSearchParams): ProductPage {
+  const type = query.get('type');
+  const grade = query.get('grade');
+  const area = query.get('area');
+  const examPrep = query.get('examPrep');
+  const q = query.get('q');
+
+  const matched = ALL_PRODUCTS.filter((product) => {
+    if (type && product.type !== type) return false;
+    if (grade && !product.grades?.includes(grade as Grade)) return false;
+    if (area && !product.areas?.includes(area as SubjectArea)) return false;
+    if (examPrep && product.examPrep !== examPrep) return false;
+    if (q && !matchesQuery(product, q)) return false;
+    return true;
+  });
+
+  const sorted = sortProducts(matched, query.get('sort'));
+  const size = Number(query.get('size')) || DEFAULT_SIZE;
+  const page = Number(query.get('page')) || 0;
+  const start = page * size;
+
+  return {
+    content: sorted.slice(start, start + size),
+    page,
+    size,
+    totalElements: sorted.length,
+    // 0 when nothing matched, the way a Spring Page reports it.
+    totalPages: Math.ceil(sorted.length / size),
+  };
+}
 
 /**
  * Builds /catalog/filters from the product list, so counts stay in sync with
  * the mock catalog instead of being a second thing to keep updated.
  *
  * TODO: labels are the raw enum values (OS_7, PRAVOPIS). The real endpoint
- * sends display labels; the filter panel (task 5) needs them translated.
+ * sends display labels; the filter panel needs them translated.
  */
 function buildFilters() {
   const grades = new Map<string, number>();
   const areas = new Map<string, number>();
   const examPrep = new Map<string, number>();
 
-  for (const product of productsPage.content) {
+  for (const product of ALL_PRODUCTS) {
     product.grades?.forEach((g) => grades.set(g, (grades.get(g) ?? 0) + 1));
     product.areas?.forEach((a) => areas.set(a, (areas.get(a) ?? 0) + 1));
     if (product.examPrep) examPrep.set(product.examPrep, (examPrep.get(product.examPrep) ?? 0) + 1);
@@ -65,8 +165,6 @@ function buildFilters() {
 /**
  * Resolves a mock response for an API path.
  *
- * TODO (task 5): /catalog/products ignores grade/area/examPrep/sort/page —
- * the catalog filters will need it to actually filter.
  * TODO: error mocks still missing — empty cart, expired access, invalid
  * coupon (spec 4.3, rule 3).
  *

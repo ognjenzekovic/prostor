@@ -1,6 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 import { RootLayout } from '../components/layout/RootLayout';
 import { NotFoundPage } from '../pages/NotFoundPage';
+import { CatalogPage } from '../pages/CatalogPage';
+import { CourseDetailPage } from '../pages/CourseDetailPage';
 import { routes } from '../lib/routes';
 import {
   AboutPage,
@@ -13,13 +15,11 @@ import {
   BlogPage,
   BundlesPage,
   CartPage,
-  CatalogPage,
   CheckoutCancelledPage,
   CheckoutPage,
   CheckoutSuccessPage,
   ClassroomPage,
   ContactPage,
-  CourseDetailPage,
   ForgotPasswordPage,
   GradePage,
   HomePage,
