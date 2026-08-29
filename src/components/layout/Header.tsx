@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Container } from './Container';
 import { LocaleSwitcher } from './LocaleSwitcher';
 import { LinkButton } from '../common/Button';
+import { useCartCount } from '../../hooks/useCart';
 import { useT } from '../../hooks/useT';
 import { routes } from '../../lib/routes';
 
@@ -14,6 +15,31 @@ const NAV_ITEMS = [
   { to: routes.about(), key: 'nav.about' },
   { to: routes.contact(), key: 'nav.contact' },
 ];
+
+/** Cart link with its count; the number is decoration, the label carries it. */
+function CartLink({ count, className }: { count: number; className?: string }) {
+  const { t } = useT();
+
+  return (
+    <NavLink
+      to={routes.cart()}
+      className={navLinkClass}
+      aria-label={count > 0 ? t('nav.cartWithCount', { count }) : undefined}
+    >
+      <span className={className}>
+        {t('nav.cart')}
+        {count > 0 && (
+          <span
+            aria-hidden="true"
+            className="ml-1.5 inline-flex size-5 items-center justify-center rounded-full bg-neutral-900 text-xs text-neutral-50"
+          >
+            {count}
+          </span>
+        )}
+      </span>
+    </NavLink>
+  );
+}
 
 function navLinkClass({ isActive }: { isActive: boolean }): string {
   return isActive
@@ -29,6 +55,7 @@ export function Header() {
   // Navigating away must close the panel, otherwise it covers the new page.
   // Adjusted during render rather than in an effect, so the panel is never
   // painted on top of the page it just left.
+  const cartCount = useCartCount();
   const [lastPath, setLastPath] = useState(location.pathname);
 
   if (lastPath !== location.pathname) {
@@ -64,9 +91,7 @@ export function Header() {
 
         <div className="hidden items-center gap-4 md:flex">
           <LocaleSwitcher />
-          <NavLink to={routes.cart()} className={navLinkClass}>
-            {t('nav.cart')}
-          </NavLink>
+          <CartLink count={cartCount} />
           <LinkButton to={routes.login()}>{t('nav.login')}</LinkButton>
         </div>
 
@@ -93,13 +118,16 @@ export function Header() {
           <Container className="py-4">
             <nav aria-label={t('nav.primary')}>
               <ul className="flex flex-col gap-1">
-                {[...NAV_ITEMS, { to: routes.cart(), key: 'nav.cart' }].map((item) => (
+                {NAV_ITEMS.map((item) => (
                   <li key={item.to}>
                     <NavLink to={item.to} className={navLinkClass}>
                       <span className="block py-2">{t(item.key)}</span>
                     </NavLink>
                   </li>
                 ))}
+                <li>
+                  <CartLink count={cartCount} className="block py-2" />
+                </li>
               </ul>
             </nav>
 

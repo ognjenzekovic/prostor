@@ -4,6 +4,7 @@ import { NotFoundPage } from '../pages/NotFoundPage';
 import { CatalogPage } from '../pages/CatalogPage';
 import { CourseDetailPage } from '../pages/CourseDetailPage';
 import { HomePage } from '../pages/HomePage';
+import { CartPage } from '../pages/CartPage';
 import { routes } from '../lib/routes';
 import {
   AboutPage,
@@ -15,7 +16,6 @@ import {
   AreaPage,
   BlogPage,
   BundlesPage,
-  CartPage,
   CheckoutCancelledPage,
   CheckoutPage,
   CheckoutSuccessPage,

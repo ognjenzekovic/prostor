@@ -25,7 +25,7 @@ function sleep(ms: number): Promise<void> {
  * The mock router is imported dynamically so a production build with
  * VITE_USE_MOCKS=false drops this branch and ships no mock data.
  */
-async function mockResponse<T>(path: string): Promise<T> {
+async function mockResponse<T>(method: string, path: string, body?: unknown): Promise<T> {
   await sleep(250 + Math.random() * 300);
 
   // Force an error to check error states, e.g. VITE_MOCK_FAIL=/catalog/products
@@ -34,7 +34,7 @@ async function mockResponse<T>(path: string): Promise<T> {
   }
 
   const { resolveMock } = await import('../mocks');
-  return resolveMock<T>(path);
+  return resolveMock<T>(method, path, body);
 }
 
 /**
@@ -76,17 +76,17 @@ function authHeaders(): Record<string, string> {
 }
 
 export async function apiGet<T>(path: string): Promise<T> {
-  return USE_MOCKS ? mockResponse<T>(path) : request<T>('GET', path);
+  return USE_MOCKS ? mockResponse<T>('GET', path) : request<T>('GET', path);
 }
 
 export async function apiPost<T>(path: string, body?: unknown): Promise<T> {
-  return USE_MOCKS ? mockResponse<T>(path) : request<T>('POST', path, body);
+  return USE_MOCKS ? mockResponse<T>('POST', path, body) : request<T>('POST', path, body);
 }
 
 export async function apiPut<T>(path: string, body?: unknown): Promise<T> {
-  return USE_MOCKS ? mockResponse<T>(path) : request<T>('PUT', path, body);
+  return USE_MOCKS ? mockResponse<T>('PUT', path, body) : request<T>('PUT', path, body);
 }
 
 export async function apiDelete<T>(path: string): Promise<T> {
-  return USE_MOCKS ? mockResponse<T>(path) : request<T>('DELETE', path);
+  return USE_MOCKS ? mockResponse<T>('DELETE', path) : request<T>('DELETE', path);
 }

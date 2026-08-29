@@ -41,7 +41,12 @@
     "error": {
       "title": "The programme could not be loaded",
       "description": "Something went wrong while loading it. Check your connection and try again."
-    }
+    },
+    "addToCart": "Add to cart",
+    "adding": "Adding…",
+    "added": "Added to cart.",
+    "toCart": "Go to cart",
+    "toLibrary": "My courses"
   },
   "lesson": {
     "freePreview": "Free lesson"
@@ -112,7 +117,9 @@
     "about": "About us",
     "contact": "Contact",
     "cart": "Cart",
-    "login": "Sign in"
+    "login": "Sign in",
+    "cartWithCount_one": "Cart, {{count}} item",
+    "cartWithCount_other": "Cart, {{count}} items"
   },
   "footer": {
     "tagline": "A place to grow.",
@@ -209,5 +216,41 @@
   "blog": {
     "readingMinutes_one": "{{count}} minute read",
     "readingMinutes_other": "{{count}} minute read"
+  },
+  "cart": {
+    "title": "Cart",
+    "remove": "Remove",
+    "discount": "Discount",
+    "total": "Total",
+    "checkout": "Continue to payment",
+    "termsNote": "By continuing you accept the terms of service.",
+    "empty": {
+      "title": "Your cart is empty",
+      "description": "Nothing added yet. Browse the courses and pick what you need right now.",
+      "action": "Browse courses"
+    },
+    "error": {
+      "title": "The cart could not be loaded",
+      "description": "Something went wrong while loading it. Please try again."
+    },
+    "coupon": {
+      "label": "Have a coupon?",
+      "apply": "Apply",
+      "applied": "Coupon {{code}} applied.",
+      "remove": "Remove coupon"
+    },
+    "clearAll": "Remove all",
+    "itemCount_one": "{{count}} item",
+    "itemCount_other": "{{count}} items"
+  },
+  "errors": {
+    "ALREADY_OWNED": "You already have access to this programme.",
+    "COUPON_INVALID": "This coupon does not exist.",
+    "COUPON_EXPIRED": "This coupon has expired.",
+    "PRODUCT_NOT_FOUND": "This programme is no longer available.",
+    "ACCESS_EXPIRED": "Your access has expired.",
+    "NO_ACCESS": "You do not have access to this content.",
+    "NETWORK_ERROR": "No connection to the server. Check your network and try again.",
+    "UNKNOWN": "Something went wrong. Please try again."
   }
 }

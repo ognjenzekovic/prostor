@@ -1,16 +1,18 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { ApiError } from '../api/errors';
 import { Container } from '../components/layout/Container';
 import { EmptyState } from '../components/common/EmptyState';
 import { ErrorState } from '../components/common/ErrorState';
-import { LinkButton } from '../components/common/Button';
+import { Button, LinkButton } from '../components/common/Button';
 import { Skeleton } from '../components/common/Skeleton';
 import { ProductGrid } from '../components/catalog/ProductGrid';
 import { LessonList } from '../components/player/LessonList';
+import { useCart } from '../hooks/useCart';
 import { useProduct } from '../hooks/useProduct';
 import { useT } from '../hooks/useT';
 import { accessLabel } from '../lib/access';
 import { areaBackground } from '../lib/areaColor';
+import { errorKey } from '../lib/errors';
 import { splitDuration } from '../lib/date';
 import { areaKey, examPrepKey, gradeKey, productTypeKey } from '../lib/enums';
 import { formatMoney } from '../lib/money';
@@ -43,6 +45,7 @@ export function CourseDetailPage() {
   const { slug = '' } = useParams();
   const { t, locale } = useT();
   const { data: product, isPending, error, refetch } = useProduct(slug);
+  const { add } = useCart();
 
   if (isPending) {
     return (
@@ -218,16 +221,50 @@ export function CourseDetailPage() {
               </div>
             </>
           ) : (
-            <p className="flex items-baseline gap-2">
-              <span className="price font-display text-3xl font-semibold text-neutral-900">
-                {formatMoney(product.price, locale)}
-              </span>
-              {product.compareAtPrice && (
-                <s className="price text-neutral-700">
-                  {formatMoney(product.compareAtPrice, locale)}
-                </s>
+            <>
+              <p className="flex items-baseline gap-2">
+                <span className="price font-display text-3xl font-semibold text-neutral-900">
+                  {formatMoney(product.price, locale)}
+                </span>
+                {product.compareAtPrice && (
+                  <s className="price text-neutral-700">
+                    {formatMoney(product.compareAtPrice, locale)}
+                  </s>
+                )}
+              </p>
+
+              <div className="mt-4">
+                <Button
+                  onClick={() => add.mutate(product.id)}
+                  disabled={add.isPending}
+                  className="w-full"
+                >
+                  {add.isPending ? t('course.adding') : t('course.addToCart')}
+                </Button>
+              </div>
+
+              {add.isSuccess && (
+                <p role="status" className="mt-3 text-sm text-neutral-900">
+                  {t('course.added')}{' '}
+                  <Link to={routes.cart()} className="underline underline-offset-4">
+                    {t('course.toCart')}
+                  </Link>
+                </p>
               )}
-            </p>
+
+              {/* 409 ALREADY_OWNED is not a failure to retry — it means the
+                  reader can go and watch it (spec 4.5). */}
+              {add.isError && (
+                <p role="alert" className="mt-3 text-sm text-danger">
+                  {t(errorKey(add.error))}{' '}
+                  {add.error instanceof ApiError && add.error.status === 409 && (
+                    <Link to={routes.library()} className="underline underline-offset-4">
+                      {t('course.toLibrary')}
+                    </Link>
+                  )}
+                </p>
+              )}
+            </>
           )}
 
           <dl className="mt-6 flex flex-col gap-3 border-t border-neutral-900/12 pt-6 text-sm">

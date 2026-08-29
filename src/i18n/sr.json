@@ -43,7 +43,12 @@
     "error": {
       "title": "Program ne može da se učita",
       "description": "Došlo je do greške pri učitavanju. Proveri internet vezu i pokušaj ponovo."
-    }
+    },
+    "addToCart": "Dodaj u korpu",
+    "adding": "Dodajem…",
+    "added": "Dodato u korpu.",
+    "toCart": "Idi na korpu",
+    "toLibrary": "Moji kursevi"
   },
   "lesson": {
     "freePreview": "Besplatna lekcija"
@@ -115,7 +120,10 @@
     "about": "Ko smo mi",
     "contact": "Kontakt",
     "cart": "Korpa",
-    "login": "Prijava"
+    "login": "Prijava",
+    "cartWithCount_one": "Korpa, {{count}} stavka",
+    "cartWithCount_few": "Korpa, {{count}} stavke",
+    "cartWithCount_other": "Korpa, {{count}} stavki"
   },
   "footer": {
     "tagline": "Mesto za tvoj rast.",
@@ -213,5 +221,42 @@
     "readingMinutes_one": "{{count}} minut čitanja",
     "readingMinutes_few": "{{count}} minuta čitanja",
     "readingMinutes_other": "{{count}} minuta čitanja"
+  },
+  "cart": {
+    "title": "Korpa",
+    "remove": "Ukloni",
+    "discount": "Popust",
+    "total": "Ukupno",
+    "checkout": "Nastavi na plaćanje",
+    "termsNote": "Nastavkom potvrđuješ uslove korišćenja.",
+    "empty": {
+      "title": "Korpa je prazna",
+      "description": "Još ništa nisi dodao. Pogledaj kurseve i izaberi ono što ti sada treba.",
+      "action": "Pogledaj kurseve"
+    },
+    "error": {
+      "title": "Korpa ne može da se učita",
+      "description": "Došlo je do greške pri učitavanju korpe. Pokušaj ponovo."
+    },
+    "coupon": {
+      "label": "Imaš kupon?",
+      "apply": "Primeni",
+      "applied": "Kupon {{code}} je primenjen.",
+      "remove": "Ukloni kupon"
+    },
+    "clearAll": "Ukloni sve",
+    "itemCount_one": "{{count}} stavka",
+    "itemCount_few": "{{count}} stavke",
+    "itemCount_other": "{{count}} stavki"
+  },
+  "errors": {
+    "ALREADY_OWNED": "Već imate pristup ovom programu.",
+    "COUPON_INVALID": "Ovaj kupon ne postoji.",
+    "COUPON_EXPIRED": "Ovaj kupon je istekao.",
+    "PRODUCT_NOT_FOUND": "Program više nije dostupan.",
+    "ACCESS_EXPIRED": "Pristup je istekao.",
+    "NO_ACCESS": "Nemate pristup ovom sadržaju.",
+    "NETWORK_ERROR": "Nema veze sa serverom. Proveri internet i pokušaj ponovo.",
+    "UNKNOWN": "Nešto je pošlo naopako. Pokušaj ponovo."
   }
 }

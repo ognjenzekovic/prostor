@@ -1,7 +1,14 @@
 import type { components } from '../api/schema';
 import { formatDate } from './date';
 
-type ProductSummary = components['schemas']['ProductSummary'];
+/**
+ * Only the three access fields are needed, so cart items and library entries
+ * qualify too — they carry the same fields without being a ProductSummary.
+ */
+type HasAccess = Pick<
+  components['schemas']['ProductSummary'],
+  'accessMode' | 'accessDurationDays' | 'accessUntil'
+>;
 
 /** An i18n key plus its interpolation values — never a finished sentence. */
 export type Label = { key: string; params?: Record<string, string | number> };
@@ -12,10 +19,10 @@ export type Label = { key: string; params?: Record<string, string | number> };
  * Three modes, three different sentences — flattening them into one ("access
  * included") throws away the only thing a buyer wants to know before paying.
  *
- * @param product - product whose accessMode drives the wording
+ * @param product - anything carrying accessMode and its companion fields
  * @param locale - BCP 47 locale, needed to format the UNTIL_DATE date
  */
-export function accessLabel(product: ProductSummary, locale: string): Label | null {
+export function accessLabel(product: HasAccess, locale: string): Label | null {
   switch (product.accessMode) {
     case 'LIFETIME':
       return { key: 'access.lifetime' };

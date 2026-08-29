@@ -3,6 +3,7 @@ import { ApiError } from '../api/errors';
 import productsPage from './products.json';
 import productDetails from './product-details.json';
 import instructors from './instructors.json';
+import * as cart from './cart';
 import blogPosts from './blog-posts.json';
 
 /**
@@ -39,25 +40,39 @@ const ALL_INSTRUCTORS = instructors as InstructorSummary[];
 const ALL_POSTS = (blogPosts.content ?? []) as BlogPostSummary[];
 const DEFAULT_SIZE = 12;
 
-type MockHandler = (path: string, query: URLSearchParams) => unknown;
+type MockContext = { path: string; query: URLSearchParams; body: unknown };
+type MockHandler = (context: MockContext) => unknown;
 
-/** Exact-path handlers, checked before the prefix ones. */
+/** Keyed by "METHOD /path"; checked before the prefix table. */
 const EXACT: Record<string, MockHandler> = {
-  '/catalog/products': (_path, query) => listProducts(query),
-  '/catalog/filters': () => buildFilters(),
-  '/catalog/instructors': () => ALL_INSTRUCTORS,
-  '/blog/posts': (_path, query) => listBlogPosts(query),
+  'GET /catalog/products': ({ query }) => listProducts(query),
+  'GET /catalog/filters': () => buildFilters(),
+  'GET /catalog/instructors': () => ALL_INSTRUCTORS,
+  'GET /blog/posts': ({ query }) => listBlogPosts(query),
+
+  'GET /cart': () => cart.getCart(),
+  'DELETE /cart': () => cart.clearCart(),
+  'POST /cart/items': ({ body }) => cart.addItem((body as { productId: string }).productId),
+  'POST /cart/coupon': ({ body }) => cart.applyCoupon((body as { code: string }).code),
+  'DELETE /cart/coupon': () => cart.removeCoupon(),
 };
 
 /** Prefix handlers for paths that carry an id or slug. */
-const PREFIXED: Array<{ prefix: string; handle: MockHandler }> = [
+const PREFIXED: Array<{ method: string; prefix: string; handle: MockHandler }> = [
   {
+    method: 'GET',
     prefix: '/catalog/products/',
-    handle: (path) => getProductDetail(path.slice('/catalog/products/'.length)),
+    handle: ({ path }) => getProductDetail(path.slice('/catalog/products/'.length)),
   },
   {
+    method: 'GET',
     prefix: '/catalog/instructors/',
-    handle: (path) => getInstructorDetail(path.slice('/catalog/instructors/'.length)),
+    handle: ({ path }) => getInstructorDetail(path.slice('/catalog/instructors/'.length)),
+  },
+  {
+    method: 'DELETE',
+    prefix: '/cart/items/',
+    handle: ({ path }) => cart.removeItem(path.slice('/cart/items/'.length)),
   },
 ];
 
@@ -223,27 +238,30 @@ function buildFilters() {
 }
 
 /**
- * Resolves a mock response for an API path.
+ * Resolves a mock response for an API call.
  *
- * TODO: error mocks still missing — empty cart, expired access, invalid
- * coupon (spec 4.3, rule 3).
+ * TODO: error mocks still missing for expired access on playback (spec 4.3).
  *
+ * @param method - HTTP method, uppercase
  * @param path - API path with query string, e.g. '/catalog/products?grade=OS_7'
- * @throws ApiError - 404 for unknown paths, so a typo shows up as an error state
+ * @param body - Parsed request body, for POST and PUT
+ * @throws ApiError - 404 for unknown routes, so a typo shows up as an error state
  */
-export function resolveMock<T>(path: string): T {
+export function resolveMock<T>(method: string, path: string, body?: unknown): T {
   const [pathname, search = ''] = path.split('?');
-  const query = new URLSearchParams(search);
+  const context: MockContext = { path: pathname, query: new URLSearchParams(search), body };
 
-  const exact = EXACT[pathname];
+  const exact = EXACT[`${method} ${pathname}`];
   if (exact) {
-    return exact(pathname, query) as T;
+    return exact(context) as T;
   }
 
-  const prefixed = PREFIXED.find((entry) => pathname.startsWith(entry.prefix));
+  const prefixed = PREFIXED.find(
+    (entry) => entry.method === method && pathname.startsWith(entry.prefix)
+  );
   if (prefixed) {
-    return prefixed.handle(pathname, query) as T;
+    return prefixed.handle(context) as T;
   }
 
-  throw new ApiError(404, 'MOCK_NOT_FOUND', `Nema mock podataka za ${path}`);
+  throw new ApiError(404, 'MOCK_NOT_FOUND', `Nema mock podataka za ${method} ${path}`);
 }

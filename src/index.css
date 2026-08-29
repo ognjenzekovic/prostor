@@ -74,52 +74,59 @@
   --radius-md: 8px;
 }
 
-html {
-  /* The header is sticky, so anchor jumps must clear it. */
-  scroll-padding-top: 5rem;
-}
+/* Element defaults belong in @layer base.
+   Unlayered CSS outranks every cascade layer, so rules written outside one
+   would beat Tailwind's utilities: `p { margin: 0 }` would silently defeat
+   `mt-3` and `mx-auto`, and the h2 size would defeat `text-xl`. Inside the
+   base layer, a utility on the element wins, which is the whole point of them. */
+@layer base {
+  html {
+    /* The header is sticky, so anchor jumps must clear it. */
+    scroll-padding-top: 5rem;
+  }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: var(--font-sans);
-  font-size: 1.0625rem;
-  line-height: 1.7;
-  color: var(--color-neutral-900);
-  background: var(--color-neutral-50);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--color-neutral-900);
+    background: var(--color-neutral-50);
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-/* Focus must stay visible — whole purchase flow is keyboard-navigable (4.8) */
-:focus-visible {
-  outline: 2px solid var(--color-brand-600);
-  outline-offset: 2px;
-}
+  /* Focus must stay visible — whole purchase flow is keyboard-navigable (4.8) */
+  :focus-visible {
+    outline: 2px solid var(--color-brand-600);
+    outline-offset: 2px;
+  }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
-  font-weight: 600;
-  color: var(--color-neutral-900);
-  margin: 0;
-}
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin: 0;
+  }
 
-h1 {
-  font-size: clamp(2rem, 5vw, 3rem);
-}
+  h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+  }
 
-h2 {
-  font-size: clamp(1.5rem, 3.5vw, 2rem);
-}
+  h2 {
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+  }
 
-h3 {
-  font-size: 1.25rem;
-}
+  h3 {
+    font-size: 1.25rem;
+  }
 
-p {
-  margin: 0;
+  p {
+    margin: 0;
+  }
 }
 
 /* Tabular numbers for prices */

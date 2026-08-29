@@ -24,7 +24,6 @@ export const LoginPage = () => <PagePlaceholder titleKey="pages.login" />;
 export const RegisterPage = () => <PagePlaceholder titleKey="pages.register" />;
 export const ForgotPasswordPage = () => <PagePlaceholder titleKey="pages.forgotPassword" />;
 
-export const CartPage = () => <PagePlaceholder titleKey="pages.cart" />;
 export const CheckoutPage = () => <PagePlaceholder titleKey="pages.checkout" />;
 export const CheckoutSuccessPage = () => <PagePlaceholder titleKey="pages.checkoutSuccess" />;
 export const CheckoutCancelledPage = () => <PagePlaceholder titleKey="pages.checkoutCancelled" />;
