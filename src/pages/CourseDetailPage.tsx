@@ -84,19 +84,19 @@ export function CourseDetailPage() {
     <Container className="py-8 sm:py-12">
       <div className="grid items-start gap-8 lg:grid-cols-[2fr_1fr]">
         <div>
-          {/* TODO: real cover image, and the preview player for free lessons. */}
-          <div
-            className={`flex aspect-video items-end rounded-md p-4 ${areaBackground(area)}`}
-            aria-hidden="true"
-          >
-            {area && (
-              <span className="text-xs font-medium tracking-wide text-neutral-700 uppercase">
-                {t(areaKey(area))}
-              </span>
-            )}
-          </div>
+          {/* The area is a tinted tag rather than a cover-sized block: it is the
+              one place the pastel appears on this page, and it carries a label,
+              not an image. Not aria-hidden — the area is named nowhere else.
+              TODO: the cover image and the free-preview player go above this. */}
+          {area && (
+            <p
+              className={`inline-flex rounded-sm px-2 py-0.5 text-xs font-medium tracking-wide text-neutral-700 uppercase ${areaBackground(area)}`}
+            >
+              {t(areaKey(area))}
+            </p>
+          )}
 
-          <div className="mt-6 flex flex-wrap gap-1">
+          <div className="mt-3 flex flex-wrap gap-1">
             <Badge>{t(productTypeKey(product.type))}</Badge>
             {product.examPrep && <Badge>{t(examPrepKey(product.examPrep))}</Badge>}
             {product.grades?.map((grade) => <Badge key={grade}>{t(gradeKey(grade))}</Badge>)}

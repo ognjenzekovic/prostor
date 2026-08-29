@@ -74,6 +74,11 @@
   --radius-md: 8px;
 }
 
+html {
+  /* The header is sticky, so anchor jumps must clear it. */
+  scroll-padding-top: 5rem;
+}
+
 body {
   margin: 0;
   padding: 0;

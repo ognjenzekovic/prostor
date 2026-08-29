@@ -40,7 +40,7 @@ export function Header() {
     // neutral-100, not the page's neutral-50: at the same value the bar is
     // held together only by its hairline. Header and footer now bracket the
     // page in the same tone.
-    <header className="border-b border-neutral-900/12 bg-neutral-100">
+    <header className="sticky top-0 z-20 border-b border-neutral-900/12 bg-neutral-100">
       <Container className="flex items-center justify-between gap-4 py-4">
         {/* TODO: replace the wordmark with the owl logo once the SVG arrives (docs/06.4). */}
         <Link
