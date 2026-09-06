@@ -74,47 +74,59 @@
   --radius-md: 8px;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: var(--font-sans);
-  font-size: 1.0625rem;
-  line-height: 1.7;
-  color: var(--color-neutral-900);
-  background: var(--color-neutral-50);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+/* Element defaults belong in @layer base.
+   Unlayered CSS outranks every cascade layer, so rules written outside one
+   would beat Tailwind's utilities: `p { margin: 0 }` would silently defeat
+   `mt-3` and `mx-auto`, and the h2 size would defeat `text-xl`. Inside the
+   base layer, a utility on the element wins, which is the whole point of them. */
+@layer base {
+  html {
+    /* The header is sticky, so anchor jumps must clear it. */
+    scroll-padding-top: 5rem;
+  }
 
-/* Focus must stay visible — whole purchase flow is keyboard-navigable (4.8) */
-:focus-visible {
-  outline: 2px solid var(--color-brand-600);
-  outline-offset: 2px;
-}
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--color-neutral-900);
+    background: var(--color-neutral-50);
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
-  font-weight: 600;
-  color: var(--color-neutral-900);
-  margin: 0;
-}
+  /* Focus must stay visible — whole purchase flow is keyboard-navigable (4.8) */
+  :focus-visible {
+    outline: 2px solid var(--color-brand-600);
+    outline-offset: 2px;
+  }
 
-h1 {
-  font-size: clamp(2rem, 5vw, 3rem);
-}
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin: 0;
+  }
 
-h2 {
-  font-size: clamp(1.5rem, 3.5vw, 2rem);
-}
+  h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+  }
 
-h3 {
-  font-size: 1.25rem;
-}
+  h2 {
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+  }
 
-p {
-  margin: 0;
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  p {
+    margin: 0;
+  }
 }
 
 /* Tabular numbers for prices */
@@ -133,6 +145,7 @@ p {
   *,
   *::before,
   *::after {
+    animation-delay: 0ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -142,3 +155,49 @@ p {
 #root {
   min-height: 100vh;
 }
+
+/* Hero scene: lock -> hand unlocking it -> the same frame becomes a bookcase
+   whose spines carry the name.
+   The headline, subhead and CTA are separate DOM and readable from first
+   paint — the scene plays beside them, never over them (docs/06 §6.5).
+   The reduced-motion rule above collapses every step, and `forwards` leaves
+   the bookcase on screen, so the resting state is identical either way. */
+@keyframes hero-lock {
+  0%, 44% { opacity: 1; }
+  60%, 100% { opacity: 0; }
+}
+
+@keyframes hero-key {
+  0% { opacity: 0; transform: translateX(70px); }
+  14%, 40% { opacity: 1; }
+  32%, 44% { transform: translateX(0); }
+  70%, 100% { opacity: 0; transform: translateX(70px); }
+}
+
+@keyframes hero-book {
+  0%, 58% { opacity: 0; transform: translateY(24px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes hero-plank {
+  0%, 54% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.hero-lock,
+.hero-key,
+.hero-book,
+.hero-plank {
+  transform-box: view-box;
+  animation-duration: 3.2s;
+  animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+  animation-fill-mode: both;
+}
+
+.hero-lock { animation-name: hero-lock; }
+.hero-key { animation-name: hero-key; }
+.hero-plank { animation-name: hero-plank; }
+
+/* Each book carries its own animation-delay inline, so the order is set
+   where the shelves are laid out rather than duplicated here. */
+.hero-book { animation-name: hero-book; }

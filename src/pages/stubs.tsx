@@ -4,14 +4,10 @@ import { PagePlaceholder } from './PagePlaceholder';
  * Every route from spec 4.4 that has no screen yet.
  *
  * They live in one file on purpose: each one is a title and nothing else, and
- * this file shrinks as pages get built (CatalogPage next, then
- * CourseDetailPage). When a page becomes real it moves to src/pages/<Name>.tsx
- * and its export is deleted from here.
+ * this file shrinks as pages get built. When a page becomes real it moves to
+ * src/pages/<Name>.tsx and its export is deleted from here.
  */
 
-export const HomePage = () => <PagePlaceholder titleKey="pages.home" />;
-export const CatalogPage = () => <PagePlaceholder titleKey="pages.catalog" />;
-export const CourseDetailPage = () => <PagePlaceholder titleKey="pages.course" />;
 export const GradePage = () => <PagePlaceholder titleKey="pages.grade" />;
 export const AreaPage = () => <PagePlaceholder titleKey="pages.area" />;
 export const MalaMaturaPage = () => <PagePlaceholder titleKey="pages.malaMatura" />;
@@ -24,11 +20,7 @@ export const BlogPage = () => <PagePlaceholder titleKey="pages.blog" />;
 export const PostPage = () => <PagePlaceholder titleKey="pages.post" />;
 export const ContactPage = () => <PagePlaceholder titleKey="pages.contact" />;
 
-export const LoginPage = () => <PagePlaceholder titleKey="pages.login" />;
-export const RegisterPage = () => <PagePlaceholder titleKey="pages.register" />;
-export const ForgotPasswordPage = () => <PagePlaceholder titleKey="pages.forgotPassword" />;
 
-export const CartPage = () => <PagePlaceholder titleKey="pages.cart" />;
 export const CheckoutPage = () => <PagePlaceholder titleKey="pages.checkout" />;
 export const CheckoutSuccessPage = () => <PagePlaceholder titleKey="pages.checkoutSuccess" />;
 export const CheckoutCancelledPage = () => <PagePlaceholder titleKey="pages.checkoutCancelled" />;

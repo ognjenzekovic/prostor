@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 import { Container } from '../components/layout/Container';
+import { LinkButton } from '../components/common/Button';
 import { useT } from '../hooks/useT';
 import { routes } from '../lib/routes';
 
@@ -14,18 +14,10 @@ export function NotFoundPage() {
       <p className="mt-4 max-w-prose text-neutral-700">{t('notFound.body')}</p>
 
       <div className="mt-8 flex flex-wrap gap-3">
-        <Link
-          to={routes.catalog()}
-          className="rounded-sm bg-brand-500 px-4 py-2 text-sm font-medium text-neutral-900"
-        >
-          {t('notFound.toCatalog')}
-        </Link>
-        <Link
-          to={routes.home()}
-          className="rounded-sm border border-neutral-900/15 px-4 py-2 text-sm text-neutral-700 hover:text-neutral-900"
-        >
+        <LinkButton to={routes.catalog()}>{t('notFound.toCatalog')}</LinkButton>
+        <LinkButton to={routes.home()} variant="outline">
           {t('notFound.toHome')}
-        </Link>
+        </LinkButton>
       </div>
     </Container>
   );

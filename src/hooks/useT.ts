@@ -8,16 +8,19 @@ import { toCyrillic } from '../lib/cyrillic';
  *
  * Use this instead of react-i18next's useTranslation everywhere text is shown
  * to the user: it returns `t` with Cyrillic transliteration already applied
- * when language is 'sr' and the reader chose Cyrillic.
+ * when language is Serbian and the reader chose Cyrillic, plus the `locale`
+ * that formatMoney and formatDate need.
  *
- * The one exception is the script switcher itself, whose labels must stay in
+ * The one exception is the language switcher itself, whose labels must stay in
  * the script they name — it uses useTranslation directly.
  */
 export function useT() {
   const { t, i18n } = useTranslation();
   const { script } = useScript();
+
   // startsWith, not ===: the language can arrive as 'sr-RS' or 'sr-Latn'.
-  const transliterate = i18n.language.startsWith('sr') && script === 'cyrillic';
+  const serbian = i18n.language.startsWith('sr');
+  const transliterate = serbian && script === 'cyrillic';
 
   const translate = useCallback(
     (key: string, options?: Record<string, unknown>): string => {
@@ -27,5 +30,5 @@ export function useT() {
     [t, transliterate]
   );
 
-  return { t: translate, i18n };
+  return { t: translate, locale: serbian ? 'sr-RS' : 'en-US', i18n };
 }

@@ -1,0 +1,217 @@
+{
+  "padezi-6-7-razred": {
+    "description": "Sedam padeža kroz primere iz svakodnevnog govora, bez učenja tabela napamet. Svaka lekcija ima kratko objašnjenje, primere i vežbanja koja se rade uz video.\n\nGradivo prati program za 6. i 7. razred, ali je korisno i za ponavljanje pred malu maturu.",
+    "whatYouWillLearn": [
+      "Da prepoznaš padež po pitanju, a ne po osećaju",
+      "Da razlikuješ akuzativ i genitiv u rečenici",
+      "Da pravilno upotrebiš predloge uz padeže",
+      "Da uradiš zadatke sa padežima na testu bez nagađanja"
+    ],
+    "requirements": ["Gradivo 5. razreda iz gramatike", "Sveska za vežbanja"],
+    "instructors": [
+      {
+        "id": "3c1b0a20-0000-4000-8000-000000000001",
+        "slug": "marija-petrovic",
+        "fullName": "Marija Petrović",
+        "title": "Profesor srpskog jezika i književnosti",
+        "shortBio": "Četrnaest godina u osnovnoj školi i pripremi za malu maturu.",
+        "areas": ["GRAMATIKA", "PRAVOPIS"],
+        "yearsExperience": 14,
+        "sortOrder": 1,
+        "active": true
+      }
+    ],
+    "lessons": [
+      { "videoId": "aa000001-0000-4000-8000-000000000001", "title": "Šta je padež i zašto ih ima sedam", "durationSec": 720, "orderIndex": 1, "isFreePreview": true, "hasAttachments": true },
+      { "videoId": "aa000001-0000-4000-8000-000000000002", "title": "Nominativ — ko ili šta", "durationSec": 900, "orderIndex": 2, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000001-0000-4000-8000-000000000003", "title": "Genitiv — koga ili čega", "durationSec": 960, "orderIndex": 3, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000001-0000-4000-8000-000000000004", "title": "Dativ — kome ili čemu", "durationSec": 1080, "orderIndex": 4, "isFreePreview": false, "hasAttachments": false },
+      { "videoId": "aa000001-0000-4000-8000-000000000005", "title": "Akuzativ — koga ili šta", "durationSec": 840, "orderIndex": 5, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000001-0000-4000-8000-000000000006", "title": "Vokativ — kada oslovljavamo", "durationSec": 1020, "orderIndex": 6, "isFreePreview": false, "hasAttachments": false },
+      { "videoId": "aa000001-0000-4000-8000-000000000007", "title": "Instrumental — s kim ili čim", "durationSec": 900, "orderIndex": 7, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000001-0000-4000-8000-000000000008", "title": "Lokativ — o kome ili o čemu", "durationSec": 1140, "orderIndex": 8, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000001-0000-4000-8000-000000000009", "title": "Padeži u rečenici — vežbanja", "durationSec": 840, "orderIndex": 9, "isFreePreview": false, "hasAttachments": true }
+    ]
+  },
+
+  "pravopis-najcesce-greske": {
+    "description": "Greške koje se najčešće javljaju u pismenim zadacima, sređene po tome koliko koštaju na testu. Svaka lekcija je pravilo plus lista primera koji se stvarno pišu pogrešno.",
+    "whatYouWillLearn": [
+      "Kada se piše sastavljeno, a kada rastavljeno",
+      "Gde ide zarez, a gde ne ide",
+      "Kada je veliko slovo obavezno",
+      "Kako da proveriš sopstveni tekst pre predaje"
+    ],
+    "requirements": ["Osnovno poznavanje vrsta reči"],
+    "instructors": [
+      {
+        "id": "3c1b0a20-0000-4000-8000-000000000001",
+        "slug": "marija-petrovic",
+        "fullName": "Marija Petrović",
+        "title": "Profesor srpskog jezika i književnosti",
+        "shortBio": "Četrnaest godina u osnovnoj školi i pripremi za malu maturu.",
+        "areas": ["GRAMATIKA", "PRAVOPIS"],
+        "yearsExperience": 14,
+        "sortOrder": 1,
+        "active": true
+      }
+    ],
+    "lessons": [
+      { "videoId": "aa000002-0000-4000-8000-000000000001", "title": "Sastavljeno i rastavljeno pisanje", "durationSec": 780, "orderIndex": 1, "isFreePreview": true, "hasAttachments": true },
+      { "videoId": "aa000002-0000-4000-8000-000000000002", "title": "Ne i ni uz reči", "durationSec": 900, "orderIndex": 2, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000002-0000-4000-8000-000000000003", "title": "Veliko slovo", "durationSec": 960, "orderIndex": 3, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000002-0000-4000-8000-000000000004", "title": "Zarez — pravila koja se pamte", "durationSec": 1020, "orderIndex": 4, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000002-0000-4000-8000-000000000005", "title": "Navodnici, crta i crtica", "durationSec": 840, "orderIndex": 5, "isFreePreview": false, "hasAttachments": false },
+      { "videoId": "aa000002-0000-4000-8000-000000000006", "title": "Č i ć, dž i đ", "durationSec": 900, "orderIndex": 6, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000002-0000-4000-8000-000000000007", "title": "Skraćenice i pisanje brojeva", "durationSec": 900, "orderIndex": 7, "isFreePreview": false, "hasAttachments": false }
+    ]
+  },
+
+  "lektira-8-razred": {
+    "description": "Lektira za 8. razred obrađena tako da posle svakog dela znaš šta da napišeš u belešci i šta se pita na času.\n\nUz svaku lekciju ide kratak podsetnik sa likovima, temom i citatima.",
+    "whatYouWillLearn": [
+      "Šta se traži u beležnici za lektiru",
+      "Kako da prepoznaš temu i ideju dela",
+      "Kako da napišeš prikaz koji nije prepričavanje",
+      "Kako da se pripremiš za pismeni zadatak o lektiri"
+    ],
+    "requirements": ["Pročitano delo pre gledanja lekcije (ili bar prvo poglavlje)"],
+    "instructors": [
+      {
+        "id": "3c1b0a20-0000-4000-8000-000000000002",
+        "slug": "jelena-ilic",
+        "fullName": "Jelena Ilić",
+        "title": "Profesor književnosti",
+        "shortBio": "Radi sa osmacima i maturantima na tumačenju književnog teksta.",
+        "areas": ["KNJIZEVNOST", "LEKTIRA"],
+        "yearsExperience": 9,
+        "sortOrder": 2,
+        "active": true
+      }
+    ],
+    "lessons": [
+      { "videoId": "aa000003-0000-4000-8000-000000000001", "title": "Kako se čita lektira i vodi beleška", "durationSec": 960, "orderIndex": 1, "isFreePreview": true, "hasAttachments": true },
+      { "videoId": "aa000003-0000-4000-8000-000000000002", "title": "Petar Kočić — „Jazavac pred sudom\"", "durationSec": 1140, "orderIndex": 2, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000003-0000-4000-8000-000000000003", "title": "Branislav Nušić — „Sumnjivo lice\"", "durationSec": 1200, "orderIndex": 3, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000003-0000-4000-8000-000000000004", "title": "Ivo Andrić — „Most na Žepi\"", "durationSec": 1260, "orderIndex": 4, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000003-0000-4000-8000-000000000005", "title": "Stevan Sremac — „Zona Zamfirova\"", "durationSec": 1080, "orderIndex": 5, "isFreePreview": false, "hasAttachments": false },
+      { "videoId": "aa000003-0000-4000-8000-000000000006", "title": "Desanka Maksimović — izbor pesama", "durationSec": 1200, "orderIndex": 6, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000003-0000-4000-8000-000000000007", "title": "Milutin Bojić — „Plava grobnica\"", "durationSec": 1140, "orderIndex": 7, "isFreePreview": false, "hasAttachments": false },
+      { "videoId": "aa000003-0000-4000-8000-000000000008", "title": "Aleksa Šantić — „Veče na školju\"", "durationSec": 1020, "orderIndex": 8, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000003-0000-4000-8000-000000000009", "title": "Jovan Dučić — izbor pesama", "durationSec": 1320, "orderIndex": 9, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000003-0000-4000-8000-000000000010", "title": "Narodna epska poezija — kosovski ciklus", "durationSec": 1200, "orderIndex": 10, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000003-0000-4000-8000-000000000011", "title": "Lirska narodna poezija", "durationSec": 1080, "orderIndex": 11, "isFreePreview": false, "hasAttachments": false },
+      { "videoId": "aa000003-0000-4000-8000-000000000012", "title": "Likovi i motivi — kako se povezuju", "durationSec": 1140, "orderIndex": 12, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000003-0000-4000-8000-000000000013", "title": "Kako napisati prikaz lektire", "durationSec": 1260, "orderIndex": 13, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000003-0000-4000-8000-000000000014", "title": "Priprema za pismeni zadatak", "durationSec": 1200, "orderIndex": 14, "isFreePreview": false, "hasAttachments": true }
+    ]
+  },
+
+  "prijemni-filoloski-knjizevnost": {
+    "description": "Pregled književnosti za prijemni ispit, po epohama, sa naglaskom na ono što se stvarno pita. Svaka epoha ima okvir, ključne pisce i tipske zadatke.",
+    "whatYouWillLearn": [
+      "Hronologiju epoha i šta ih razdvaja",
+      "Ključne pisce i dela po epohi",
+      "Kako se tumači nepoznat književni tekst",
+      "Kako izgledaju zadaci na prijemnom i koliko traju"
+    ],
+    "requirements": ["Gradivo srednje škole iz književnosti", "Vreme za čitanje između lekcija"],
+    "instructors": [
+      {
+        "id": "3c1b0a20-0000-4000-8000-000000000002",
+        "slug": "jelena-ilic",
+        "fullName": "Jelena Ilić",
+        "title": "Profesor književnosti",
+        "shortBio": "Radi sa osmacima i maturantima na tumačenju književnog teksta.",
+        "areas": ["KNJIZEVNOST", "LEKTIRA"],
+        "yearsExperience": 9,
+        "sortOrder": 2,
+        "active": true
+      }
+    ],
+    "lessons": [
+      { "videoId": "aa000004-0000-4000-8000-000000000001", "title": "Kako izgleda prijemni iz književnosti", "durationSec": 1200, "orderIndex": 1, "isFreePreview": true, "hasAttachments": true },
+      { "videoId": "aa000004-0000-4000-8000-000000000002", "title": "Antička književnost — Homer", "durationSec": 1320, "orderIndex": 2, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000004-0000-4000-8000-000000000003", "title": "Srednjovekovna srpska književnost", "durationSec": 1440, "orderIndex": 3, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000004-0000-4000-8000-000000000004", "title": "Narodna književnost — epika i lirika", "durationSec": 1380, "orderIndex": 4, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000004-0000-4000-8000-000000000005", "title": "Humanizam i renesansa", "durationSec": 1260, "orderIndex": 5, "isFreePreview": false, "hasAttachments": false },
+      { "videoId": "aa000004-0000-4000-8000-000000000006", "title": "Barok i klasicizam", "durationSec": 1440, "orderIndex": 6, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000004-0000-4000-8000-000000000007", "title": "Prosvetiteljstvo — Dositej Obradović", "durationSec": 1320, "orderIndex": 7, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000004-0000-4000-8000-000000000008", "title": "Romantizam — Branko Radičević i Đura Jakšić", "durationSec": 1380, "orderIndex": 8, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000004-0000-4000-8000-000000000009", "title": "Romantizam — Laza Kostić", "durationSec": 1200, "orderIndex": 9, "isFreePreview": false, "hasAttachments": false },
+      { "videoId": "aa000004-0000-4000-8000-000000000010", "title": "Realizam — Simo Matavulj i Laza Lazarević", "durationSec": 1440, "orderIndex": 10, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000004-0000-4000-8000-000000000011", "title": "Realizam — Stevan Sremac i Branislav Nušić", "durationSec": 1380, "orderIndex": 11, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000004-0000-4000-8000-000000000012", "title": "Moderna — Bora Stanković", "durationSec": 1320, "orderIndex": 12, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000004-0000-4000-8000-000000000013", "title": "Moderna — Jovan Dučić i Milan Rakić", "durationSec": 1260, "orderIndex": 13, "isFreePreview": false, "hasAttachments": false },
+      { "videoId": "aa000004-0000-4000-8000-000000000014", "title": "Međuratna književnost — Miloš Crnjanski", "durationSec": 1440, "orderIndex": 14, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000004-0000-4000-8000-000000000015", "title": "Savremena književnost — Ivo Andrić", "durationSec": 1380, "orderIndex": 15, "isFreePreview": false, "hasAttachments": true },
+      { "videoId": "aa000004-0000-4000-8000-000000000016", "title": "Tumačenje književnog teksta na prijemnom", "durationSec": 1440, "orderIndex": 16, "isFreePreview": false, "hasAttachments": true }
+    ]
+  },
+
+  "kongruencija-lekcija": {
+    "description": "Jedna lekcija o slaganju reči u rečenici — u rodu, broju i padežu. Kupuje se zasebno, bez celog kursa.",
+    "whatYouWillLearn": [
+      "Šta je kongruencija i gde se najčešće greši",
+      "Slaganje subjekta i predikata",
+      "Slaganje prideva i imenice"
+    ],
+    "requirements": ["Poznavanje vrsta reči"],
+    "instructors": [
+      {
+        "id": "3c1b0a20-0000-4000-8000-000000000001",
+        "slug": "marija-petrovic",
+        "fullName": "Marija Petrović",
+        "title": "Profesor srpskog jezika i književnosti",
+        "shortBio": "Četrnaest godina u osnovnoj školi i pripremi za malu maturu.",
+        "areas": ["GRAMATIKA", "PRAVOPIS"],
+        "yearsExperience": 14,
+        "sortOrder": 1,
+        "active": true
+      }
+    ],
+    "lessons": [
+      { "videoId": "aa000005-0000-4000-8000-000000000001", "title": "Kongruencija — slaganje reči u rečenici", "durationSec": 1620, "orderIndex": 1, "isFreePreview": false, "hasAttachments": true }
+    ]
+  },
+
+  "mala-matura-kompletna-priprema": {
+    "description": "Tri kursa koja pokrivaju sve što se pita na maloj maturi iz srpskog: padeže, pravopis i lektiru za 8. razred.\n\nPristup traje do 15. jula 2027, dakle kroz ceo period pripreme i sam ispit.",
+    "whatYouWillLearn": [
+      "Gramatiku i pravopis na nivou koji traži test",
+      "Lektiru za 8. razred sa beleškama",
+      "Kako se rešava kombinovani test",
+      "Raspored učenja do ispita"
+    ],
+    "requirements": ["Gradivo do 8. razreda"],
+    "instructors": [
+      {
+        "id": "3c1b0a20-0000-4000-8000-000000000001",
+        "slug": "marija-petrovic",
+        "fullName": "Marija Petrović",
+        "title": "Profesor srpskog jezika i književnosti",
+        "shortBio": "Četrnaest godina u osnovnoj školi i pripremi za malu maturu.",
+        "areas": ["GRAMATIKA", "PRAVOPIS"],
+        "yearsExperience": 14,
+        "sortOrder": 1,
+        "active": true
+      },
+      {
+        "id": "3c1b0a20-0000-4000-8000-000000000002",
+        "slug": "jelena-ilic",
+        "fullName": "Jelena Ilić",
+        "title": "Profesor književnosti",
+        "shortBio": "Radi sa osmacima i maturantima na tumačenju književnog teksta.",
+        "areas": ["KNJIZEVNOST", "LEKTIRA"],
+        "yearsExperience": 9,
+        "sortOrder": 2,
+        "active": true
+      }
+    ],
+    "includedProductSlugs": [
+      "padezi-6-7-razred",
+      "pravopis-najcesce-greske",
+      "lektira-8-razred"
+    ]
+  }
+}

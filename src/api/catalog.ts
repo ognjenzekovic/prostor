@@ -54,3 +54,23 @@ export async function getProduct(slug: string): Promise<ProductDetail> {
 export async function getFilters(): Promise<CatalogFilters> {
   return apiGet<CatalogFilters>('/catalog/filters');
 }
+
+/**
+ * Get all active instructors.
+ *
+ * @returns Instructor list, ordered by sortOrder from the server
+ */
+export async function getInstructors(): Promise<components['schemas']['InstructorSummary'][]> {
+  return apiGet<components['schemas']['InstructorSummary'][]>('/catalog/instructors');
+}
+
+/**
+ * Get one instructor with their programmes and posts.
+ *
+ * @param slug - Instructor slug
+ */
+export async function getInstructor(
+  slug: string
+): Promise<components['schemas']['InstructorDetail']> {
+  return apiGet<components['schemas']['InstructorDetail']>(`/catalog/instructors/${slug}`);
+}

@@ -1853,7 +1853,8 @@ export interface components {
             email: string;
             /** Format: password */
             password: string;
-            fullName: string;
+            firstName: string;
+            lastName: string;
             script?: components["schemas"]["Script"];
             acceptTerms?: boolean;
         };
@@ -1884,7 +1885,8 @@ export interface components {
             id: string;
             /** Format: email */
             email: string;
-            fullName: string;
+            firstName: string;
+            lastName: string;
             role: components["schemas"]["UserRole"];
             emailVerified: boolean;
             script?: components["schemas"]["Script"];

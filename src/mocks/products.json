@@ -26,7 +26,6 @@
       "coverUrl": "/mock/covers/padezi.jpg",
       "lessonCount": 9,
       "totalDurationSec": 8400,
-      "owned": false,
       "published": true
     },
     {
@@ -56,7 +55,6 @@
       "coverUrl": "/mock/covers/pravopis.jpg",
       "lessonCount": 7,
       "totalDurationSec": 6300,
-      "owned": true,
       "published": true
     },
     {
@@ -85,7 +83,6 @@
       "coverUrl": "/mock/covers/lektira8.jpg",
       "lessonCount": 14,
       "totalDurationSec": 16200,
-      "owned": false,
       "published": true
     },
     {
@@ -119,7 +116,6 @@
       "coverUrl": "/mock/covers/mala-matura.jpg",
       "lessonCount": 30,
       "totalDurationSec": 30900,
-      "owned": false,
       "published": true
     },
     {
@@ -147,7 +143,6 @@
       "coverUrl": "/mock/covers/prijemni.jpg",
       "lessonCount": 16,
       "totalDurationSec": 21600,
-      "owned": false,
       "published": true
     },
     {
@@ -176,7 +171,6 @@
       "coverUrl": "/mock/covers/kongruencija.jpg",
       "lessonCount": 1,
       "totalDurationSec": 1620,
-      "owned": false,
       "published": true
     }
   ],

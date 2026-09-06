@@ -1,6 +1,14 @@
 import { Route, Routes } from 'react-router-dom';
 import { RootLayout } from '../components/layout/RootLayout';
 import { NotFoundPage } from '../pages/NotFoundPage';
+import { CatalogPage } from '../pages/CatalogPage';
+import { CourseDetailPage } from '../pages/CourseDetailPage';
+import { HomePage } from '../pages/HomePage';
+import { CartPage } from '../pages/CartPage';
+import { LoginPage } from '../pages/LoginPage';
+import { RegisterPage } from '../pages/RegisterPage';
+import { ForgotPasswordPage } from '../pages/ForgotPasswordPage';
+import { RequireAuth } from './RequireAuth';
 import { routes } from '../lib/routes';
 import {
   AboutPage,
@@ -12,27 +20,20 @@ import {
   AreaPage,
   BlogPage,
   BundlesPage,
-  CartPage,
-  CatalogPage,
   CheckoutCancelledPage,
   CheckoutPage,
   CheckoutSuccessPage,
   ClassroomPage,
   ContactPage,
-  CourseDetailPage,
-  ForgotPasswordPage,
   GradePage,
-  HomePage,
   InstructorPage,
   InstructorsPage,
   LibraryPage,
-  LoginPage,
   MalaMaturaPage,
   OrdersPage,
   PostPage,
   PrijemniPage,
   PrivacyPolicyPage,
-  RegisterPage,
   ReturnsPage,
   TermsOfServicePage,
 } from '../pages/stubs';
@@ -44,8 +45,8 @@ import {
  * way they take a real slug, so introducing the /:lang prefix (ODLUKA-12)
  * still touches one file.
  *
- * TODO: guards for 🔒 / 👑 routes when auth exists, and React.lazy for the
- * admin chunk (spec 4.9) once those pages hold anything.
+ * TODO: React.lazy for the admin chunk (spec 4.9) once those pages hold
+ * anything.
  */
 export function AppRoutes() {
   return (
@@ -73,20 +74,24 @@ export function AppRoutes() {
         <Route path={routes.forgotPassword()} element={<ForgotPasswordPage />} />
 
         {/* Authenticated */}
-        <Route path={routes.cart()} element={<CartPage />} />
-        <Route path={routes.checkout()} element={<CheckoutPage />} />
-        <Route path={routes.checkoutSuccess()} element={<CheckoutSuccessPage />} />
-        <Route path={routes.checkoutCancelled()} element={<CheckoutCancelledPage />} />
-        <Route path={routes.library()} element={<LibraryPage />} />
-        <Route path={routes.classroom(':slug', ':lessonId')} element={<ClassroomPage />} />
-        <Route path={routes.account()} element={<AccountPage />} />
-        <Route path={routes.orders()} element={<OrdersPage />} />
+        <Route element={<RequireAuth />}>
+          <Route path={routes.cart()} element={<CartPage />} />
+          <Route path={routes.checkout()} element={<CheckoutPage />} />
+          <Route path={routes.checkoutSuccess()} element={<CheckoutSuccessPage />} />
+          <Route path={routes.checkoutCancelled()} element={<CheckoutCancelledPage />} />
+          <Route path={routes.library()} element={<LibraryPage />} />
+          <Route path={routes.classroom(':slug', ':lessonId')} element={<ClassroomPage />} />
+          <Route path={routes.account()} element={<AccountPage />} />
+          <Route path={routes.orders()} element={<OrdersPage />} />
+        </Route>
 
         {/* Admin */}
-        <Route path={routes.admin()} element={<AdminDashboardPage />} />
-        <Route path={routes.adminProducts()} element={<AdminProductsPage />} />
-        <Route path={routes.adminOrders()} element={<AdminOrdersPage />} />
-        <Route path={routes.adminCoupons()} element={<AdminCouponsPage />} />
+        <Route element={<RequireAuth role="ADMIN" />}>
+          <Route path={routes.admin()} element={<AdminDashboardPage />} />
+          <Route path={routes.adminProducts()} element={<AdminProductsPage />} />
+          <Route path={routes.adminOrders()} element={<AdminOrdersPage />} />
+          <Route path={routes.adminCoupons()} element={<AdminCouponsPage />} />
+        </Route>
 
         {/* Legal */}
         <Route path={routes.termsOfService()} element={<TermsOfServicePage />} />

@@ -2,7 +2,103 @@
   "common": {
     "brand": "Prostor",
     "skipToContent": "Skip to content",
-    "underConstruction": "This page is being built."
+    "underConstruction": "This page is being built.",
+    "retry": "Try again"
+  },
+  "catalog": {
+    "title": "Courses",
+    "subtitle": "Serbian language and literature, by grade and subject area. Recorded lessons you watch at your own pace.",
+    "count_one": "{{count}} programme",
+    "count_other": "{{count}} programmes",
+    "empty": {
+      "title": "No programmes match your search",
+      "description": "Nothing matches what you were looking for. Try without filters, or browse the whole catalogue.",
+      "action": "Show all programmes"
+    },
+    "error": {
+      "title": "The catalogue could not be loaded",
+      "description": "Something went wrong while loading the programmes. Check your connection and try again."
+    }
+  },
+  "course": {
+    "whatYouWillLearn": "What you will learn",
+    "lessons": "Contents",
+    "lessonsNote_one": "{{count}} lesson",
+    "lessonsNote_other": "{{count}} lessons",
+    "included": "What the bundle contains",
+    "requirements": "What you need to know first",
+    "instructors": "Who teaches",
+    "continue": "Continue learning",
+    "access": "Access",
+    "lessonCount": "Lessons",
+    "duration": "Length",
+    "schoolYear": "School year",
+    "notFound": {
+      "title": "This programme does not exist",
+      "description": "The link may be outdated, or the programme was withdrawn. Have a look at what is available now.",
+      "action": "Browse courses"
+    },
+    "error": {
+      "title": "The programme could not be loaded",
+      "description": "Something went wrong while loading it. Check your connection and try again."
+    },
+    "addToCart": "Add to cart",
+    "adding": "Adding…",
+    "added": "Added to cart.",
+    "toCart": "Go to cart",
+    "toLibrary": "My courses"
+  },
+  "lesson": {
+    "freePreview": "Free lesson"
+  },
+  "product": {
+    "owned": "You already have access",
+    "lessons_one": "{{count}} lesson",
+    "lessons_other": "{{count}} lessons",
+    "durationHours": "{{hours}} h {{minutes}} min",
+    "durationMinutes": "{{minutes}} min"
+  },
+  "access": {
+    "lifetime": "Lifetime access",
+    "days": "Access for {{days}} days",
+    "untilDate": "Valid until {{date}}"
+  },
+  "pagination": {
+    "label": "Pagination",
+    "previous": "Previous",
+    "next": "Next",
+    "position": "Page {{page}} of {{totalPages}}"
+  },
+  "enums": {
+    "grade": {
+      "OS_5": "Grade 5",
+      "OS_6": "Grade 6",
+      "OS_7": "Grade 7",
+      "OS_8": "Grade 8",
+      "SS_1": "Secondary 1",
+      "SS_2": "Secondary 2",
+      "SS_3": "Secondary 3",
+      "SS_4": "Secondary 4"
+    },
+    "area": {
+      "GRAMATIKA": "Grammar",
+      "PRAVOPIS": "Orthography",
+      "KNJIZEVNOST": "Literature",
+      "LEKTIRA": "Set reading",
+      "PISMENO_IZRAZAVANJE": "Writing",
+      "GOVORNE_VEZBE": "Speaking"
+    },
+    "examPrep": {
+      "MALA_MATURA": "Lower secondary exam",
+      "UPIS_SREDNJA": "Secondary school entry",
+      "MATURA": "School leaving exam",
+      "PRIJEMNI_FAKULTET": "University entrance exam"
+    },
+    "productType": {
+      "VIDEO": "Lesson",
+      "COURSE": "Course",
+      "BUNDLE": "Bundle"
+    }
   },
   "locale": {
     "label": "Language and script",
@@ -21,7 +117,10 @@
     "about": "About us",
     "contact": "Contact",
     "cart": "Cart",
-    "login": "Sign in"
+    "login": "Sign in",
+    "cartWithCount_one": "Cart, {{count}} item",
+    "cartWithCount_other": "Cart, {{count}} items",
+    "logout": "Sign out"
   },
   "footer": {
     "tagline": "A place to grow.",
@@ -75,5 +174,138 @@
     "terms": "Terms of service",
     "privacy": "Privacy policy",
     "returns": "Returns"
+  },
+  "home": {
+    "hero": {
+      "title": "A place to grow",
+      "subtitle": "Recorded lessons in Serbian language and literature — from grade 5 to the university entrance exam. Watch at your own pace, as many times as you need.",
+      "note": "“Knowledge and skill are things nobody can take away from you.”",
+      "primary": "Browse courses",
+      "secondary": "Lower secondary exam prep",
+      "sceneAlt": "A lock being opened by a hand, turning into a bookshelf whose spines spell PROSTOR"
+    },
+    "courses": {
+      "title": "Most popular programmes",
+      "all": "All courses"
+    },
+    "blog": {
+      "title": "From the reading shelf",
+      "all": "All articles",
+      "error": {
+        "title": "Articles could not be loaded",
+        "description": "Something went wrong while loading them. Please try again."
+      }
+    },
+    "acrostic": {
+      "question": "Who are we?",
+      "answer": "Mentors",
+      "imageAlt": "The PROSTOR acrostic: Proactive, Reasonable, Responsible, Systematic, Tolerant, Organised, Realistic — circled initials joined into a descending chain."
+    },
+    "instructors": {
+      "title": "Mentors",
+      "error": {
+        "title": "Mentors could not be loaded",
+        "description": "Something went wrong while loading them. Please try again."
+      }
+    },
+    "cta": {
+      "title": "Start with what you need right now",
+      "description": "Pick a grade or a subject area and see what we cover.",
+      "action": "Browse courses"
+    }
+  },
+  "blog": {
+    "readingMinutes_one": "{{count}} minute read",
+    "readingMinutes_other": "{{count}} minute read"
+  },
+  "cart": {
+    "title": "Cart",
+    "remove": "Remove",
+    "discount": "Discount",
+    "total": "Total",
+    "checkout": "Continue to payment",
+    "termsNote": "By continuing you accept the terms of service.",
+    "empty": {
+      "title": "Your cart is empty",
+      "description": "Nothing added yet. Browse the courses and pick what you need right now.",
+      "action": "Browse courses"
+    },
+    "error": {
+      "title": "The cart could not be loaded",
+      "description": "Something went wrong while loading it. Please try again."
+    },
+    "coupon": {
+      "label": "Have a coupon?",
+      "apply": "Apply",
+      "applied": "Coupon {{code}} applied.",
+      "remove": "Remove coupon"
+    },
+    "clearAll": "Remove all",
+    "itemCount_one": "{{count}} item",
+    "itemCount_other": "{{count}} items"
+  },
+  "errors": {
+    "ALREADY_OWNED": "You already have access to this programme.",
+    "COUPON_INVALID": "This coupon does not exist.",
+    "COUPON_EXPIRED": "This coupon has expired.",
+    "PRODUCT_NOT_FOUND": "This programme is no longer available.",
+    "ACCESS_EXPIRED": "Your access has expired.",
+    "NO_ACCESS": "You do not have access to this content.",
+    "NETWORK_ERROR": "No connection to the server. Check your network and try again.",
+    "UNKNOWN": "Something went wrong. Please try again.",
+    "EMAIL_TAKEN": "An account with this email already exists.",
+    "INVALID_CREDENTIALS": "Wrong email or password.",
+    "TOKEN_EXPIRED": "Your session expired. Please sign in again.",
+    "UNAUTHORIZED": "You need to sign in for this."
+  },
+  "auth": {
+    "email": "Email address",
+    "password": "Password",
+    "login": {
+      "title": "Sign in",
+      "subtitle": "Sign in to pick up where you left off.",
+      "action": "Sign in",
+      "pending": "Signing in…",
+      "invalid": "Wrong email or password.",
+      "forgot": "Forgotten your password?",
+      "noAccount": "No account yet?",
+      "toRegister": "Create one",
+      "demoHint": "Demo accounts: ucenik@primer.rs and admin@primer.rs, password prostor123."
+    },
+    "register": {
+      "title": "Create an account",
+      "subtitle": "An account is only needed to buy and watch. The catalogue is open to everyone.",
+      "action": "Create account",
+      "pending": "Creating account…",
+      "acceptPrefix": "I accept the",
+      "acceptAnd": "and the",
+      "haveAccount": "Already have an account?",
+      "toLogin": "Sign in"
+    },
+    "forgot": {
+      "title": "Forgotten password",
+      "subtitle": "Enter the account email address and we will send a link to set a new password.",
+      "action": "Send link",
+      "pending": "Sending…",
+      "sent": "If an account exists for {{email}}, a reset link is on its way. Check your spam folder too.",
+      "backToLogin": "Back to sign in"
+    },
+    "firstName": "First name",
+    "lastName": "Surname",
+    "rules": {
+      "name": "At least {{count}} letters. Letters, spaces, hyphens and apostrophes only.",
+      "email": "For example name.surname@gmail.com — English letters, digits, dot, hyphen, underscore and plus.",
+      "password": "At least {{count}} characters.",
+      "passwordRequired": "Enter your account password."
+    }
+  },
+  "validation": {
+    "required": "This field is required.",
+    "mustAccept": "You must accept the terms to continue.",
+    "email": "Enter a valid email address.",
+    "nameTooShort": "Enter at least 2 letters.",
+    "nameTooLong": "At most 60 characters.",
+    "nameCharacters": "Letters, spaces, hyphens and apostrophes only.",
+    "passwordTooShort": "The password must be at least 8 characters."
   }
 }
