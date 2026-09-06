@@ -1,6 +1,7 @@
 import type { components } from '../api/schema';
 import { ApiError } from '../api/errors';
 import productsPage from './products.json';
+import { currentAccount } from './auth';
 
 /**
  * Cart state for the mock backend.
@@ -19,17 +20,36 @@ type ProductSummary = components['schemas']['ProductSummary'];
 const ALL_PRODUCTS = productsPage.content as ProductSummary[];
 const CURRENCY = 'RSD';
 
-/**
- * Kept in sessionStorage so a page reload does not silently empty the cart
- * mid-demo. Mock-layer only — the real cart lives on the server.
- */
-const STORAGE_KEY = 'mockCart';
-
 type CartState = { productIds: string[]; couponCode: string | null };
 
-function readState(): CartState {
+/**
+ * Every cart endpoint is authenticated by contract, so the mock refuses the
+ * same way the server would rather than quietly handing out a shared cart.
+ *
+ * @throws ApiError - 401 when signed out
+ */
+function requireUserId(): string {
+  const account = currentAccount();
+
+  if (!account) {
+    throw new ApiError(401, 'UNAUTHORIZED', 'Za korpu je potrebna prijava');
+  }
+
+  return account.user.id;
+}
+
+/**
+ * Kept in sessionStorage, keyed per user, so a reload does not silently empty
+ * the cart mid-demo and two accounts in one tab do not share one.
+ * Mock-layer only — the real cart lives on the server.
+ */
+function storageKey(userId: string): string {
+  return `mockCart.${userId}`;
+}
+
+function readState(userId: string): CartState {
   try {
-    const stored = sessionStorage.getItem(STORAGE_KEY);
+    const stored = sessionStorage.getItem(storageKey(userId));
     if (stored) return JSON.parse(stored) as CartState;
   } catch {
     // Corrupt or unavailable storage just means an empty cart.
@@ -37,8 +57,8 @@ function readState(): CartState {
   return { productIds: [], couponCode: null };
 }
 
-function writeState(state: CartState): void {
-  sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+function writeState(userId: string, state: CartState): void {
+  sessionStorage.setItem(storageKey(userId), JSON.stringify(state));
 }
 
 /** "3490.00" -> 349000. Two decimals by contract, so this is exact. */
@@ -97,7 +117,7 @@ function build(state: CartState): Cart {
 }
 
 export function getCart(): Cart {
-  return build(readState());
+  return build(readState(requireUserId()));
 }
 
 /**
@@ -106,34 +126,37 @@ export function getCart(): Cart {
  * flow branches on (spec 4.5).
  */
 export function addItem(productId: string): Cart {
+  const userId = requireUserId();
   const product = ALL_PRODUCTS.find((candidate) => candidate.id === productId);
 
   if (!product) {
     throw new ApiError(404, 'PRODUCT_NOT_FOUND', 'Proizvod ne postoji');
   }
 
-  if (product.owned) {
+  if (currentAccount()?.entitlements.includes(product.slug)) {
     throw new ApiError(409, 'ALREADY_OWNED', 'Vec imate pristup ovom programu');
   }
 
-  const state = readState();
+  const state = readState(userId);
 
   if (!state.productIds.includes(productId)) {
     state.productIds.push(productId);
-    writeState(state);
+    writeState(userId, state);
   }
 
   return build(state);
 }
 
 export function removeItem(productId: string): Cart {
-  const state = readState();
+  const userId = requireUserId();
+  const state = readState(userId);
   state.productIds = state.productIds.filter((id) => id !== productId);
-  writeState(state);
+  writeState(userId, state);
   return build(state);
 }
 
 export function applyCoupon(code: string): Cart {
+  const userId = requireUserId();
   const normalized = code.trim().toUpperCase();
   const coupon = COUPONS[normalized];
 
@@ -145,19 +168,20 @@ export function applyCoupon(code: string): Cart {
     throw new ApiError(422, 'COUPON_EXPIRED', 'Kupon je istekao');
   }
 
-  const state = readState();
+  const state = readState(userId);
   state.couponCode = normalized;
-  writeState(state);
+  writeState(userId, state);
   return build(state);
 }
 
 export function removeCoupon(): Cart {
-  const state = readState();
+  const userId = requireUserId();
+  const state = readState(userId);
   state.couponCode = null;
-  writeState(state);
+  writeState(userId, state);
   return build(state);
 }
 
 export function clearCart(): void {
-  writeState({ productIds: [], couponCode: null });
+  writeState(requireUserId(), { productIds: [], couponCode: null });
 }

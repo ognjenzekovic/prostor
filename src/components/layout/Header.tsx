@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Container } from './Container';
 import { LocaleSwitcher } from './LocaleSwitcher';
 import { LinkButton } from '../common/Button';
+import { useAuth } from '../../app/AuthContext';
 import { useCartCount } from '../../hooks/useCart';
 import { useT } from '../../hooks/useT';
 import { routes } from '../../lib/routes';
@@ -38,6 +39,45 @@ function CartLink({ count, className }: { count: number; className?: string }) {
         )}
       </span>
     </NavLink>
+  );
+}
+
+/**
+ * Sign-in button, or the account link and a way out.
+ *
+ * The name is a link to the account page rather than a menu: one dropdown for
+ * two destinations is machinery the screen does not need yet.
+ */
+function AccountControls({ onNavigate }: { onNavigate?: () => void }) {
+  const { t } = useT();
+  const { user, signOut } = useAuth();
+
+  if (!user) {
+    return <LinkButton to={routes.login()}>{t('nav.login')}</LinkButton>;
+  }
+
+  return (
+    <div className="flex items-center gap-4">
+      {/* First name only: the bar is tight, and it is how we address people.
+          The full name stays available on hover and to a screen reader. */}
+      <NavLink
+        to={routes.account()}
+        className={navLinkClass}
+        title={`${user.firstName} ${user.lastName}`}
+      >
+        {user.firstName}
+      </NavLink>
+      <button
+        type="button"
+        onClick={() => {
+          void signOut();
+          onNavigate?.();
+        }}
+        className="text-sm text-neutral-700 underline underline-offset-4 hover:text-neutral-900"
+      >
+        {t('nav.logout')}
+      </button>
+    </div>
   );
 }
 
@@ -92,7 +132,7 @@ export function Header() {
         <div className="hidden items-center gap-4 md:flex">
           <LocaleSwitcher />
           <CartLink count={cartCount} />
-          <LinkButton to={routes.login()}>{t('nav.login')}</LinkButton>
+          <AccountControls />
         </div>
 
         <button
@@ -131,9 +171,9 @@ export function Header() {
               </ul>
             </nav>
 
-            <div className="mt-4 flex items-center justify-between gap-4">
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
               <LocaleSwitcher />
-              <LinkButton to={routes.login()}>{t('nav.login')}</LinkButton>
+              <AccountControls onNavigate={() => setMenuOpen(false)} />
             </div>
           </Container>
         </div>

@@ -4,6 +4,7 @@ import productsPage from './products.json';
 import productDetails from './product-details.json';
 import instructors from './instructors.json';
 import * as cart from './cart';
+import * as auth from './auth';
 import blogPosts from './blog-posts.json';
 
 /**
@@ -35,6 +36,15 @@ type DetailSource = Omit<ProductDetail, keyof ProductSummary> & {
 };
 
 const ALL_PRODUCTS = productsPage.content as ProductSummary[];
+
+/**
+ * `owned` is per-caller by contract — "true samo ako je zahtev autentifikovan
+ * i korisnik ima pristup" — so it is stamped on the way out rather than stored
+ * with the product.
+ */
+function withOwnership<T extends ProductSummary>(product: T): T {
+  return { ...product, owned: auth.currentEntitlements().includes(product.slug) };
+}
 const DETAILS = productDetails as unknown as Record<string, DetailSource>;
 const ALL_INSTRUCTORS = instructors as InstructorSummary[];
 const ALL_POSTS = (blogPosts.content ?? []) as BlogPostSummary[];
@@ -55,6 +65,13 @@ const EXACT: Record<string, MockHandler> = {
   'POST /cart/items': ({ body }) => cart.addItem((body as { productId: string }).productId),
   'POST /cart/coupon': ({ body }) => cart.applyCoupon((body as { code: string }).code),
   'DELETE /cart/coupon': () => cart.removeCoupon(),
+
+  'POST /auth/login': ({ body }) => auth.login(body as never),
+  'POST /auth/register': ({ body }) => auth.register(body as never),
+  'POST /auth/refresh': ({ body }) => auth.refresh((body as { refreshToken: string }).refreshToken),
+  'POST /auth/logout': () => undefined,
+  'POST /auth/password-reset/request': () => undefined,
+  'GET /auth/me': () => auth.me(),
 };
 
 /** Prefix handlers for paths that carry an id or slug. */
@@ -93,7 +110,7 @@ function getInstructorDetail(slug: string) {
     ...instructor,
     products: ALL_PRODUCTS.filter((product) =>
       product.areas?.some((area) => instructor.areas?.includes(area))
-    ),
+    ).map(withOwnership),
   };
 }
 
@@ -140,11 +157,11 @@ function getProductDetail(slug: string): ProductDetail {
   const { includedProductSlugs, ...detail } = DETAILS[slug] ?? {};
 
   return {
-    ...summary,
+    ...withOwnership(summary),
     ...detail,
     ...(includedProductSlugs && {
       includedProducts: includedProductSlugs.flatMap((included) =>
-        ALL_PRODUCTS.filter((product) => product.slug === included)
+        ALL_PRODUCTS.filter((product) => product.slug === included).map(withOwnership)
       ),
     }),
   };
@@ -200,7 +217,7 @@ function listProducts(query: URLSearchParams): ProductPage {
   const start = page * size;
 
   return {
-    content: sorted.slice(start, start + size),
+    content: sorted.slice(start, start + size).map(withOwnership),
     page,
     size,
     totalElements: sorted.length,

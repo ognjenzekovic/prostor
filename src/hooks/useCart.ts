@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type { components } from '../api/schema';
+import { useAuth } from '../app/AuthContext';
 import {
   addToCart,
   applyCoupon,
@@ -20,13 +21,18 @@ const CART_KEY = ['cart'];
  * response straight into the cache instead of refetching — the totals on
  * screen are the ones the server just calculated, with no in-between state
  * where the list and the total disagree.
+ *
+ * The cart belongs to an account, so the query only runs once there is one;
+ * asking while signed out would just collect 401s.
  */
 export function useCart() {
   const queryClient = useQueryClient();
+  const { user } = useAuth();
 
   const query = useQuery({
     queryKey: CART_KEY,
     queryFn: getCart,
+    enabled: Boolean(user),
   });
 
   const write = (cart: Cart) => queryClient.setQueryData(CART_KEY, cart);
@@ -52,6 +58,7 @@ export function useCart() {
  * state change, and reads the same cache entry.
  */
 export function useCartCount(): number {
-  const { data } = useQuery({ queryKey: CART_KEY, queryFn: getCart });
+  const { user } = useAuth();
+  const { data } = useQuery({ queryKey: CART_KEY, queryFn: getCart, enabled: Boolean(user) });
   return data?.items.length ?? 0;
 }

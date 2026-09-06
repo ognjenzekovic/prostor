@@ -20,9 +20,6 @@ export const BlogPage = () => <PagePlaceholder titleKey="pages.blog" />;
 export const PostPage = () => <PagePlaceholder titleKey="pages.post" />;
 export const ContactPage = () => <PagePlaceholder titleKey="pages.contact" />;
 
-export const LoginPage = () => <PagePlaceholder titleKey="pages.login" />;
-export const RegisterPage = () => <PagePlaceholder titleKey="pages.register" />;
-export const ForgotPasswordPage = () => <PagePlaceholder titleKey="pages.forgotPassword" />;
 
 export const CheckoutPage = () => <PagePlaceholder titleKey="pages.checkout" />;
 export const CheckoutSuccessPage = () => <PagePlaceholder titleKey="pages.checkoutSuccess" />;

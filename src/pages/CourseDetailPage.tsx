@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ApiError } from '../api/errors';
 import { Container } from '../components/layout/Container';
 import { EmptyState } from '../components/common/EmptyState';
@@ -46,6 +46,23 @@ export function CourseDetailPage() {
   const { t, locale } = useT();
   const { data: product, isPending, error, refetch } = useProduct(slug);
   const { add } = useCart();
+  const navigate = useNavigate();
+
+  /**
+   * Adding requires an account. Rather than showing "sign in first" and making
+   * the reader find their way back, send them to sign-in with the way back
+   * attached (spec 4.5).
+   */
+  function addToCart(productId: string) {
+    add.mutate(productId, {
+      onError: (error) => {
+        if (error instanceof ApiError && error.status === 401) {
+          const back = encodeURIComponent(location.pathname);
+          navigate(`${routes.login()}?redirect=${back}`);
+        }
+      },
+    });
+  }
 
   if (isPending) {
     return (
@@ -235,7 +252,7 @@ export function CourseDetailPage() {
 
               <div className="mt-4">
                 <Button
-                  onClick={() => add.mutate(product.id)}
+                  onClick={() => addToCart(product.id)}
                   disabled={add.isPending}
                   className="w-full"
                 >

@@ -119,7 +119,8 @@
     "cart": "Cart",
     "login": "Sign in",
     "cartWithCount_one": "Cart, {{count}} item",
-    "cartWithCount_other": "Cart, {{count}} items"
+    "cartWithCount_other": "Cart, {{count}} items",
+    "logout": "Sign out"
   },
   "footer": {
     "tagline": "A place to grow.",
@@ -251,6 +252,60 @@
     "ACCESS_EXPIRED": "Your access has expired.",
     "NO_ACCESS": "You do not have access to this content.",
     "NETWORK_ERROR": "No connection to the server. Check your network and try again.",
-    "UNKNOWN": "Something went wrong. Please try again."
+    "UNKNOWN": "Something went wrong. Please try again.",
+    "EMAIL_TAKEN": "An account with this email already exists.",
+    "INVALID_CREDENTIALS": "Wrong email or password.",
+    "TOKEN_EXPIRED": "Your session expired. Please sign in again.",
+    "UNAUTHORIZED": "You need to sign in for this."
+  },
+  "auth": {
+    "email": "Email address",
+    "password": "Password",
+    "login": {
+      "title": "Sign in",
+      "subtitle": "Sign in to pick up where you left off.",
+      "action": "Sign in",
+      "pending": "Signing in…",
+      "invalid": "Wrong email or password.",
+      "forgot": "Forgotten your password?",
+      "noAccount": "No account yet?",
+      "toRegister": "Create one",
+      "demoHint": "Demo accounts: ucenik@primer.rs and admin@primer.rs, password prostor123."
+    },
+    "register": {
+      "title": "Create an account",
+      "subtitle": "An account is only needed to buy and watch. The catalogue is open to everyone.",
+      "action": "Create account",
+      "pending": "Creating account…",
+      "acceptPrefix": "I accept the",
+      "acceptAnd": "and the",
+      "haveAccount": "Already have an account?",
+      "toLogin": "Sign in"
+    },
+    "forgot": {
+      "title": "Forgotten password",
+      "subtitle": "Enter the account email address and we will send a link to set a new password.",
+      "action": "Send link",
+      "pending": "Sending…",
+      "sent": "If an account exists for {{email}}, a reset link is on its way. Check your spam folder too.",
+      "backToLogin": "Back to sign in"
+    },
+    "firstName": "First name",
+    "lastName": "Surname",
+    "rules": {
+      "name": "At least {{count}} letters. Letters, spaces, hyphens and apostrophes only.",
+      "email": "For example name.surname@gmail.com — English letters, digits, dot, hyphen, underscore and plus.",
+      "password": "At least {{count}} characters.",
+      "passwordRequired": "Enter your account password."
+    }
+  },
+  "validation": {
+    "required": "This field is required.",
+    "mustAccept": "You must accept the terms to continue.",
+    "email": "Enter a valid email address.",
+    "nameTooShort": "Enter at least 2 letters.",
+    "nameTooLong": "At most 60 characters.",
+    "nameCharacters": "Letters, spaces, hyphens and apostrophes only.",
+    "passwordTooShort": "The password must be at least 8 characters."
   }
 }

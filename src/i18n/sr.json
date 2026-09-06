@@ -123,7 +123,8 @@
     "login": "Prijava",
     "cartWithCount_one": "Korpa, {{count}} stavka",
     "cartWithCount_few": "Korpa, {{count}} stavke",
-    "cartWithCount_other": "Korpa, {{count}} stavki"
+    "cartWithCount_other": "Korpa, {{count}} stavki",
+    "logout": "Odjava"
   },
   "footer": {
     "tagline": "Mesto za tvoj rast.",
@@ -257,6 +258,60 @@
     "ACCESS_EXPIRED": "Pristup je istekao.",
     "NO_ACCESS": "Nemate pristup ovom sadržaju.",
     "NETWORK_ERROR": "Nema veze sa serverom. Proveri internet i pokušaj ponovo.",
-    "UNKNOWN": "Nešto je pošlo naopako. Pokušaj ponovo."
+    "UNKNOWN": "Nešto je pošlo naopako. Pokušaj ponovo.",
+    "EMAIL_TAKEN": "Nalog sa ovom email adresom već postoji.",
+    "INVALID_CREDENTIALS": "Pogrešan email ili lozinka.",
+    "TOKEN_EXPIRED": "Sesija je istekla. Prijavi se ponovo.",
+    "UNAUTHORIZED": "Za ovo je potrebna prijava."
+  },
+  "auth": {
+    "email": "Email adresa",
+    "password": "Lozinka",
+    "login": {
+      "title": "Prijava",
+      "subtitle": "Prijavi se da nastaviš tamo gde si stao.",
+      "action": "Prijavi se",
+      "pending": "Prijavljujem…",
+      "invalid": "Pogrešan email ili lozinka.",
+      "forgot": "Zaboravio si lozinku?",
+      "noAccount": "Nemaš nalog?",
+      "toRegister": "Napravi ga",
+      "demoHint": "Demo nalozi: ucenik@primer.rs i admin@primer.rs, lozinka prostor123."
+    },
+    "register": {
+      "title": "Registracija",
+      "subtitle": "Nalog ti treba samo za kupovinu i gledanje. Katalog je otvoren svima.",
+      "action": "Napravi nalog",
+      "pending": "Pravim nalog…",
+      "acceptPrefix": "Prihvatam",
+      "acceptAnd": "i",
+      "haveAccount": "Već imaš nalog?",
+      "toLogin": "Prijavi se"
+    },
+    "forgot": {
+      "title": "Zaboravljena lozinka",
+      "subtitle": "Upiši email adresu naloga i poslaćemo link za postavljanje nove lozinke.",
+      "action": "Pošalji link",
+      "pending": "Šaljem…",
+      "sent": "Ako postoji nalog za {{email}}, link za novu lozinku je poslat. Proveri i neželjenu poštu.",
+      "backToLogin": "Nazad na prijavu"
+    },
+    "firstName": "Ime",
+    "lastName": "Prezime",
+    "rules": {
+      "name": "Najmanje {{count}} slova. Dozvoljena su slova, razmak, crtica i apostrof.",
+      "email": "Na primer ime.prezime@gmail.com — engleska slova, brojevi, tačka, crtica, donja crta i plus.",
+      "password": "Najmanje {{count}} znakova.",
+      "passwordRequired": "Upiši lozinku svog naloga."
+    }
+  },
+  "validation": {
+    "required": "Ovo polje je obavezno.",
+    "mustAccept": "Moraš prihvatiti uslove da bi nastavio.",
+    "email": "Upiši ispravnu email adresu.",
+    "nameTooShort": "Upiši najmanje 2 slova.",
+    "nameTooLong": "Najviše 60 znakova.",
+    "nameCharacters": "Dozvoljena su samo slova, razmak, crtica i apostrof.",
+    "passwordTooShort": "Lozinka mora imati najmanje 8 znakova."
   }
 }
