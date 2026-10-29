@@ -262,7 +262,9 @@
     "EMAIL_TAKEN": "Nalog sa ovom email adresom već postoji.",
     "INVALID_CREDENTIALS": "Pogrešan email ili lozinka.",
     "TOKEN_EXPIRED": "Sesija je istekla. Prijavi se ponovo.",
-    "UNAUTHORIZED": "Za ovo je potrebna prijava."
+    "UNAUTHORIZED": "Za ovo je potrebna prijava.",
+    "RATE_LIMITED": "Previše pokušaja. Sačekaj nekoliko minuta pa pokušaj ponovo.",
+    "LINK_EXPIRED": "Ovaj link više ne važi. Zatraži novi."
   },
   "auth": {
     "email": "Email adresa",
@@ -312,6 +314,7 @@
     "nameTooShort": "Upiši najmanje 2 slova.",
     "nameTooLong": "Najviše 60 znakova.",
     "nameCharacters": "Dozvoljena su samo slova, razmak, crtica i apostrof.",
-    "passwordTooShort": "Lozinka mora imati najmanje 8 znakova."
+    "passwordTooShort": "Lozinka mora imati najmanje 8 znakova.",
+    "passwordTooLong": "Lozinka je predugačka — najviše 72 bajta (slova č, ć, š, ž i đ broje se dvostruko)."
   }
 }

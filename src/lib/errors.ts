@@ -19,6 +19,8 @@ const TRANSLATED = new Set([
   'INVALID_CREDENTIALS',
   'TOKEN_EXPIRED',
   'UNAUTHORIZED',
+  'RATE_LIMITED',
+  'LINK_EXPIRED',
 ]);
 
 /**

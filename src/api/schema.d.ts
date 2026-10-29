@@ -281,7 +281,10 @@ export interface paths {
                 content: {
                     "application/json": {
                         token: string;
-                        /** Format: password */
+                        /**
+                         * Format: password
+                         * @description Najvise 72 bajta UTF-8 (granica BCrypt-a) — bajta, ne znakova.
+                         */
                         newPassword: string;
                     };
                 };
@@ -1445,7 +1448,8 @@ export interface paths {
             requestBody: {
                 content: {
                     "application/json": {
-                        fullName?: string;
+                        firstName?: string;
+                        lastName?: string;
                         script?: components["schemas"]["Script"];
                     };
                 };
@@ -1817,8 +1821,12 @@ export interface components {
         OrderStatus: "PENDING" | "PAID" | "FAILED" | "CANCELLED" | "REFUNDED";
         /** @enum {string} */
         PaymentStatus: "INITIATED" | "AUTHORIZED" | "CAPTURED" | "FAILED" | "REFUNDED";
-        /** @enum {string} */
-        UserRole: "STUDENT" | "ADMIN";
+        /**
+         * @description Jedna uloga po korisniku u odgovoru: ADMIN ako je nalog ima, inace USER.
+         *     Claim `roles` u access tokenu nosi sve uloge naloga.
+         * @enum {string}
+         */
+        UserRole: "USER" | "ADMIN";
         /** @enum {string} */
         EntitlementSource: "ORDER" | "GIFT" | "PROMO" | "MANUAL";
         /** @enum {string} */
@@ -1851,11 +1859,20 @@ export interface components {
         RegisterRequest: {
             /** Format: email */
             email: string;
-            /** Format: password */
+            /**
+             * Format: password
+             * @description Najvise 72 bajta UTF-8 (granica BCrypt-a) — bajta, ne znakova.
+             */
             password: string;
+            /**
+             * @description Slova bilo kog pisma, razmak, crtica i apostrof; bar dva slova. Isto pravilo
+             *     kao `personName` u frontendu i `@PersonName` u backendu.
+             */
             firstName: string;
+            /** @description Isto pravilo kao `firstName`. */
             lastName: string;
             script?: components["schemas"]["Script"];
+            /** @description Backend belezi vreme pristanka ako je true; ne odbija false. */
             acceptTerms?: boolean;
         };
         LoginRequest: {
