@@ -36,7 +36,7 @@ const ACCOUNTS: Account[] = [
       email: 'ucenik@primer.rs',
       firstName: 'Milica',
       lastName: 'Jovanović',
-      role: 'STUDENT',
+      role: 'USER',
       emailVerified: true,
       script: 'lat',
       createdAt: '2026-02-11T10:00:00Z',
@@ -149,7 +149,7 @@ export function register(body: RegisterRequest): AuthResponse {
       email,
       firstName: body.firstName,
       lastName: body.lastName,
-      role: 'STUDENT',
+      role: 'USER',
       // The contract says a verification email is sent, so a fresh account
       // is not verified yet.
       emailVerified: false,

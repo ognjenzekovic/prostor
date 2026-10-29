@@ -31,6 +31,13 @@ const MAX_EMAIL_LENGTH = 254;
 const MAX_LOCAL_LENGTH = 64;
 
 export const MIN_PASSWORD_LENGTH = 8;
+
+/**
+ * BCrypt's limit, in bytes of UTF-8 rather than characters: č ć š ž đ take two bytes
+ * each, so a long Serbian password can pass a character count and still be rejected.
+ * The backend's @Password checks exactly this.
+ */
+export const MAX_PASSWORD_BYTES = 72;
 export const MIN_NAME_LENGTH = 2;
 export const MAX_NAME_LENGTH = 60;
 
@@ -76,7 +83,11 @@ export function email(value: string): string | null {
 
 export function password(value: string): string | null {
   if (!value) return 'validation.required';
-  return value.length >= MIN_PASSWORD_LENGTH ? null : 'validation.passwordTooShort';
+  if (value.length < MIN_PASSWORD_LENGTH) return 'validation.passwordTooShort';
+  if (new TextEncoder().encode(value).length > MAX_PASSWORD_BYTES) {
+    return 'validation.passwordTooLong';
+  }
+  return null;
 }
 
 /**

@@ -256,7 +256,9 @@
     "EMAIL_TAKEN": "An account with this email already exists.",
     "INVALID_CREDENTIALS": "Wrong email or password.",
     "TOKEN_EXPIRED": "Your session expired. Please sign in again.",
-    "UNAUTHORIZED": "You need to sign in for this."
+    "UNAUTHORIZED": "You need to sign in for this.",
+    "RATE_LIMITED": "Too many attempts. Wait a few minutes and try again.",
+    "LINK_EXPIRED": "This link no longer works. Request a new one."
   },
   "auth": {
     "email": "Email address",
@@ -306,6 +308,7 @@
     "nameTooShort": "Enter at least 2 letters.",
     "nameTooLong": "At most 60 characters.",
     "nameCharacters": "Letters, spaces, hyphens and apostrophes only.",
-    "passwordTooShort": "The password must be at least 8 characters."
+    "passwordTooShort": "The password must be at least 8 characters.",
+    "passwordTooLong": "The password is too long — at most 72 bytes (č, ć, š, ž and đ count twice)."
   }
 }

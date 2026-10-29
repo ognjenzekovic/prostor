@@ -34,7 +34,7 @@ async function mockResponse<T>(method: string, path: string, body?: unknown): Pr
 
   // Force an error to check error states, e.g. VITE_MOCK_FAIL=/catalog/products
   if (import.meta.env.VITE_MOCK_FAIL === path) {
-    throw new ApiError(500, 'INTERNAL_ERROR', 'Forced mock error for testing');
+    throw new ApiError(500, 'INTERNAL_SERVER_ERROR', 'Forced mock error for testing');
   }
 
   const { resolveMock } = await import('../mocks');
