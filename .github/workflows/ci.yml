@@ -1,0 +1,36 @@
+name: CI
+
+# Every push to any branch, so a PR into develop carries a check before it is merged.
+# Checks only; deploying stays in deploy.yml.
+on:
+  push:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      # -b, not a plain --noEmit: the root tsconfig.json only references the app and node
+      # projects, so `tsc --noEmit` from the root checks no files at all.
+      - name: Type check
+        run: npx tsc -b
+
+      # The mock build is what the demo ships. gen:api is not run here: CI cannot see
+      # prostor-be, and schema.d.ts is committed.
+      - name: Build
+        run: npm run build
+        env:
+          VITE_USE_MOCKS: 'true'
